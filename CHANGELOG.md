@@ -4,6 +4,11 @@ All notable changes to delivery are documented here.
 
 Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match `plugin.json`.
 
+## [0.3.3] — Codex adapter synchronization (2026-09-15)
+
+### Fixed
+- Updated the Codex manifest and portability contract for the consolidated engagement setup, client-status, and deliverable-QA surface.
+
 ## [0.3.2] — claude plugin eval suite (2026-09-15)
 
 Nucleus Operating Model Refactor Phase 4 step 4.2.

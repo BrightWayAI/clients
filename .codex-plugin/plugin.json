@@ -1,7 +1,7 @@
 {
   "name": "delivery",
-  "version": "0.3.2",
-  "description": "Client engagement lifecycle: start (project-setup), status (client-status), QA (review-deliverable). Renamed from project-setup, 2026-09-15.",
+  "version": "0.3.3",
+  "description": "Create an engagement plan, portable AI workspace prompt, folder blueprint, and next action; draft weekly client-status updates; and run structured deliverable QA.",
   "author": {
     "name": "BrightWay AI",
     "url": "https://brightwayai.com"
@@ -18,7 +18,7 @@
   "interface": {
     "displayName": "Delivery",
     "shortDescription": "Start, status-update, and QA a client engagement",
-    "longDescription": "Create an engagement plan, portable AI workspace prompt, folder blueprint, next action, and optional Cortex nodes from approved inputs. Draft weekly client status updates. Run structured brand/quality QA on deliverables before you ship.",
+    "longDescription": "Create an engagement plan, portable AI workspace prompt, folder blueprint, and next action; draft weekly client-status updates; and run structured deliverable QA.",
     "developerName": "BrightWay AI",
     "category": "Productivity",
     "capabilities": [

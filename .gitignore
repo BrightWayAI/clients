@@ -6,3 +6,6 @@ references/user-context.md
 
 # Archives
 *.zip
+
+# claude plugin eval results (Nucleus Operating Model Refactor Phase 4 step 4.2)
+evals/results/

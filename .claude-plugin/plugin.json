@@ -1,6 +1,6 @@
 {
   "name": "delivery",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Client engagement lifecycle: start, status, QA. /project-setup initializes a new engagement end-to-end (Drive structure, Claude Project prompt, phased plan, memory node). /client-status drafts weekly client-facing status updates. /review-deliverable runs a structured brand/quality QA pass before you ship. Renamed from project-setup, 2026-09-15 — absorbs client-status and core-ops's review-deliverable.",
   "author": {
     "name": "BrightWay AI"

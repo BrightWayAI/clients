@@ -1,14 +1,14 @@
 {
   "name": "clients",
-  "version": "0.5.0",
-  "description": "Client Success. Create an engagement plan, portable AI workspace prompt, folder blueprint, and next action; draft weekly client-status updates; and run structured deliverable QA.",
+  "version": "0.6.1",
+  "description": "Create an engagement plan, portable AI workspace prompt, folder blueprint, and next action; draft weekly client-status updates; and run structured deliverable QA.",
   "author": {
     "name": "BrightWay AI",
     "url": "https://brightwayai.com"
   },
   "license": "MIT",
-  "homepage": "https://github.com/BrightWayAI/delivery",
-  "repository": "https://github.com/BrightWayAI/delivery",
+  "homepage": "https://github.com/BrightWayAI/clients",
+  "repository": "https://github.com/BrightWayAI/clients",
   "keywords": [
     "nucleus",
     "chatgpt",
@@ -26,7 +26,7 @@
       "Write",
       "Interactive"
     ],
-    "websiteURL": "https://github.com/BrightWayAI/delivery",
+    "websiteURL": "https://github.com/BrightWayAI/clients",
     "defaultPrompt": [
       "Set up a new client project.",
       "Draft this week's client status updates.",

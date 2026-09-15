@@ -99,7 +99,7 @@ references/
 
 Client Success ships as a native OpenAI plugin as well as a Claude plugin. In
 ChatGPT desktop Local Work, enable **Client Success** and ask naturally or mention
-`@ClientSuccess`. In Codex, use natural language or the namespaced skills exposed
+`@Client Success`. In Codex, use natural language or the namespaced skills exposed
 by the plugin. Claude slash-command names in this README remain workflow aliases.
 
 All hosts resolve the same `<config-root>` used by Cortex, so Claude, ChatGPT desktop,

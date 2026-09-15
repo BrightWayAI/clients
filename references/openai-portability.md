@@ -26,7 +26,7 @@ Identity and voice remain shared files at `<config-root>/memory/me/identity.md` 
 
 ## Invocation
 
-- ChatGPT desktop: enable the plugin in a chat, then ask naturally or use `@ClientSuccess <request>`.
+- ChatGPT desktop: enable the plugin in a chat, then ask naturally or use `@Client Success <request>`.
 - Codex: ask naturally or invoke the namespaced Agent Skill shown by the client.
 - Claude slash commands remain aliases in prose. `/example` means the matching skill
   workflow; it does not require an OpenAI slash-command feature.

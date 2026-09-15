@@ -10,7 +10,7 @@ End-to-end client engagement initialization. A new client signs → run this com
 
 ## Step 0 — Preflight
 
-Read `<config-root>/plugins/project-setup.user-context.md`. If missing, route to `/setup-projects` and stop.
+Read `<config-root>/plugins/delivery.user-context.md`. If missing, route to `/setup-projects` and stop.
 
 Extract:
 - Identity (your name, company, what you do)
@@ -19,12 +19,18 @@ Extract:
 - Companion plugins (cortex installed → run memory init; core-ops installed → can pull pipeline context)
 - Communication defaults (default cadence, response time)
 
-Read the template files:
+Read user-owned template overrides when present, otherwise the bundled defaults:
+- `<config-root>/plugins/delivery/templates/drive-structure.md` → fallback `references/templates/drive-structure.md`
+- `<config-root>/plugins/delivery/templates/claude-project-prompt.md` → fallback `references/templates/claude-project-prompt.md`
+- `<config-root>/plugins/delivery/templates/project-plans.md` → fallback `references/templates/project-plans.md`
+
+Bundled defaults:
 - `references/templates/drive-structure.md`
 - `references/templates/claude-project-prompt.md`
 - `references/templates/project-plans.md`
 
-These are user-editable — the user customizes them to match their offerings. Use them as the structural source-of-truth for outputs.
+Installed plugin files are read-only. User-owned overrides are the structural source
+of truth when present; otherwise use bundled defaults.
 
 ---
 

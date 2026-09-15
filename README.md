@@ -45,8 +45,8 @@ Run `/setup-status` to configure `/client-status`.
 `/review-deliverable` reads brand/CRM config from `core-ops.user-context.md`
 cross-plugin (same pattern `relationships` uses) — no separate setup step.
 
-Saved to `<config-root>/plugins/project-setup.user-context.md` and
-`<config-root>/plugins/client-status.user-context.md`.
+Saved to `<config-root>/plugins/delivery.user-context.md` and
+`<config-root>/plugins/delivery-status.user-context.md`.
 
 ## Customizing templates
 
@@ -57,7 +57,8 @@ The plugin ships with **starter templates** in `references/templates/`:
 - `project-plans.md` — phased delivery plans per offering
 - `status-template.md` — weekly status update structure
 
-Edit these to match your firm. Setup interviews pull offering names + durations from your config, but the structural templates are yours to customize.
+Copy any template you want to customize into
+`<config-root>/plugins/delivery/templates/`. Bundled references remain immutable.
 
 ## Companion plugins
 

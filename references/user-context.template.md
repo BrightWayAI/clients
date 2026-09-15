@@ -1,4 +1,4 @@
-# project-setup user context (TEMPLATE)
+# delivery user context (TEMPLATE)
 
 _Run `/setup-projects` to generate your real `references/user-context.md` (gitignored)._
 
@@ -30,4 +30,4 @@ _Last updated: [filled by setup]_
 ## Companion plugins
 - **claude-cortex:** [installed / not installed]
 - **core-ops:** [installed / not installed]
-- **weekly-outreach:** [installed / not installed]
+- **relationships:** [installed / not installed]

@@ -1,4 +1,4 @@
-# client-status user context (TEMPLATE)
+# delivery status user context (TEMPLATE)
 
 _Run `/setup-status` to generate your real `references/user-context.md` (gitignored)._
 

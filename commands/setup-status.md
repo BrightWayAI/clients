@@ -1,35 +1,29 @@
 ---
-description: Configure client-status for your cadence, voice match, status template, per-client overrides, and delivery channel. Re-run anytime to update.
+description: Configure Delivery status drafting for cadence, voice match, user-owned template overrides, per-client rules, and delivery channel. Writes `<config-root>/plugins/delivery-status.user-context.md`. Re-run anytime to update.
 ---
 
 # /setup-status
 
-Short interview that captures what client-status needs to draft useful updates.
+Short interview that captures what Delivery needs to draft useful client updates.
 
 ---
 
 ## Step 0 — Resolve plugin config root
 
-Per-plugin config in this marketplace lives under a user-chosen folder, recorded at `~/Documents/.claude-plugin-config-root` (single-line text file in the user's home).
+Resolve explicit override → `CORTEX_CONFIG_ROOT` → `~/.cortex/config-root` →
+legacy pointer → default. Request access only to the resolved directory. If no root
+has been intentionally configured, route to Cortex setup instead of creating a
+plugin-specific pointer.
 
-### A — Try the pointer
-
-Ensure access to `~/Documents`. In Cowork, call `request_cowork_directory(~/Documents)` once if not already granted. In Claude Code (or any environment with direct filesystem access), no mount is needed. Then read `~/Documents/.claude-plugin-config-root`.
-- **Exists**: read line 1 → that's the config root path. Ensure access to `<config-root>`. If running in Cowork and the folder isn't already mounted in this session, call `request_cowork_directory(<config-root>)`. If running in Claude Code or another environment with direct filesystem access, no mount call is needed. Skip to section C.
-- **Missing**: continue to section B.
-
-### B — First-time bootstrap
-
-Prompt: "First-time plugin setup. Where should I store your plugin config — identity, voice, and per-plugin settings? Pick a folder you control (e.g., `~/Documents/Claude/` or `~/Documents/PluginConfig/`). The folder will hold `identity.md`, `voice.md`, and a `plugins/` subdirectory."
-
-Then:
-1. Ensure access to `<path>`. If running in Cowork and the folder isn't already mounted in this session, call `request_cowork_directory(<path>)`. If running in Claude Code or another environment with direct filesystem access, no mount call is needed. Create `<path>/plugins/`. Write absolute path to `~/Documents/.claude-plugin-config-root`.
-
-### C — Read shared identity and voice
+### Read shared identity and voice
 
 Read `<config-root>/memory/me/identity.md` (cortex's `/setup-identity`) and `<config-root>/memory/me/voice.md` (cortex's `/setup-voice`). If both are populated, you have most of what's needed for tone — only ask about cadence and delivery below. If missing, offer to run those commands first or proceed inline.
 
-For the rest of this document, **`<config-root>`** refers to the resolved path. This plugin's config file lives at **`<config-root>/plugins/client-status.user-context.md`**.
+For the rest of this document, **`<config-root>`** refers to the resolved path. This plugin's status config lives at **`<config-root>/plugins/delivery-status.user-context.md`**.
+
+If the canonical file is missing, check
+`<config-root>/plugins/client-status.user-context.md` once and offer to import it
+without deleting the old file. <!-- LEGACY_COMPAT -->
 
 ---
 
@@ -43,11 +37,14 @@ For the rest of this document, **`<config-root>`** refers to the resolved path. 
 
 ## Step 2 — Status template
 
-The plugin ships with a starter template at `references/templates/status-template.md`. The default structure: What we did / What we learned / What's next / Anything we need from you.
+The plugin ships with an immutable starter at `references/templates/status-template.md`.
+Customized copies live at
+`<config-root>/plugins/delivery/templates/status-template.md`. The default structure:
+What we did / What we learned / What's next / Anything we need from you.
 
 Ask:
 - Want to use the default template, or customize it now? (most users start default and refine over time)
-- If customize: walk through which sections to add/remove/reorder
+- If customize: preview a user-owned copy, then write it after confirmation; never edit the bundled reference
 
 ---
 
@@ -57,7 +54,7 @@ Some clients prefer different formats. Ask:
 - Any clients that want a longer / shorter / different format? (capture per-client overrides)
 - Any clients that should be EXCLUDED from automatic drafting? (e.g., a client who prefers no weekly updates)
 
-If user has `project-setup` installed and wants to use those engagements, walk through each active engagement to capture overrides.
+If Delivery has configured engagements, walk through each active engagement to capture overrides.
 
 ---
 
@@ -78,7 +75,7 @@ If user has `project-setup` installed and wants to use those engagements, walk t
 
 ## Step 6 — Write config
 
-Populate `<config-root>/plugins/client-status.user-context.md` per the template structure.
+Populate `<config-root>/plugins/delivery-status.user-context.md` per the template structure.
 
 ---
 

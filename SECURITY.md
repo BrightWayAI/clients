@@ -2,17 +2,18 @@
 
 ## What this plugin does with your data
 
-Project Setup interviews you about a new client engagement and produces structured outputs (Drive folder structure to create manually, Claude Project system prompt, phased project plan, optional memory node). Reads almost nothing automatically; writes only locally.
+Delivery manages new-engagement setup, client-status drafting, and deliverable QA. It writes only user-owned local configuration and confirmed Cortex memory updates.
 
 **Reads:**
 - **Information from the user during the interview** (no automated reads).
-- **Plugin references** — `references/user-context.md` (your offerings catalog), `references/templates/*.md` (template files for the four outputs).
-- **Working memory** (if `claude-cortex` installed) — `~/Documents/Claude/memory/DASHBOARD.md` to determine where the new memory node should go.
-- **Shared user-level config** — `~/Documents/Claude/identity.md` (read-only).
+- **Plugin references** — immutable `references/*.template.md` and `references/templates/*.md` starter files.
+- **Working memory** (if Cortex is installed) — `<config-root>/memory/DASHBOARD.md` and relevant client/person nodes.
+- **Shared private profile** — `<config-root>/memory/me/identity.md` and `voice.md` (read-only).
 
 **Writes:**
-- **Plugin user-context** — `references/user-context.md` (after `/setup-projects`).
-- **Memory node** (only if `claude-cortex` installed and user confirms) — `~/Documents/Claude/memory/client/[client-name].md` plus a small entry in `DASHBOARD.md` for the new node.
+- **Plugin settings** — `<config-root>/plugins/delivery.user-context.md` and `delivery-status.user-context.md`.
+- **Template overrides** — `<config-root>/plugins/delivery/templates/`.
+- **Memory node** (only if Cortex is installed and the user confirms) — `<config-root>/memory/client/[client-name].md` plus a small entry in `DASHBOARD.md`.
 - **Outputs in the conversation** — Drive folder structure (text only; user creates manually), Claude Project system prompt (copy-paste ready), phased project plan, immediate next step.
 
 **Does not:**
@@ -23,9 +24,10 @@ Project Setup interviews you about a new client engagement and produces structur
 
 ## Where data lives
 
-- Plugin reference files (config and templates) inside the installed plugin directory.
-- Memory node at `~/Documents/Claude/memory/client/[client-name].md` (if cortex installed).
-- Shared identity (read-only) at `~/Documents/Claude/identity.md`.
+- Immutable reference templates inside the installed plugin directory.
+- User settings and template overrides under `<config-root>/plugins/`.
+- Memory node at `<config-root>/memory/client/[client-name].md` (if Cortex is installed).
+- Shared private profile (read-only) under `<config-root>/memory/me/`.
 
 ## What gets sent off your machine
 
@@ -41,6 +43,6 @@ Project Setup interviews you about a new client engagement and produces structur
 
 Report privately via GitHub Security Advisories:
 
-https://github.com/BrightWayAI/project-setup/security/advisories/new
+https://github.com/BrightWayAI/delivery/security/advisories/new
 
 Do not open a public issue for security concerns. We aim to respond within 5 business days.

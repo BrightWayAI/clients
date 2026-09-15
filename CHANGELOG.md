@@ -4,6 +4,13 @@ All notable changes to delivery are documented here.
 
 Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match `plugin.json`.
 
+## [0.3.4] — canonical Delivery state ownership (2026-09-15)
+
+### Changed
+- Canonicalized engagement and status configuration as `delivery.user-context.md` and `delivery-status.user-context.md`, with non-destructive one-time legacy imports.
+- Moved user template overrides under the config root and removed runtime edits to installed plugin files.
+- Updated client-status workflows to read Delivery and the canonical private voice path.
+
 ## [0.3.3] — Codex adapter synchronization (2026-09-15)
 
 ### Fixed

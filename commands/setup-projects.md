@@ -34,7 +34,7 @@ Once the user provides the path:
 
 ### C — Read shared identity
 
-Read `<config-root>/identity.md` (the canonical identity file populated by cortex's `/setup-identity`).
+Read `<config-root>/memory/me/identity.md` (the canonical identity file populated by cortex's `/setup-identity`).
 
 - **Exists and populated** → pre-fill Section 1 (Identity) of this interview from those values. Skip those questions; just confirm what you read.
 - **Missing** → offer: "Want to capture name/company/role/tools once via `/setup-identity` (in cortex) so all marketplace plugins can read it? Or capture identity inline here only?" Route to `/setup-identity` if user prefers, then resume.

@@ -1,6 +1,6 @@
 {
   "name": "project-setup",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Initialize a new client engagement end-to-end. Interviews you about the engagement, then produces: (1) Drive folder structure, (2) Claude Project system prompt ready to paste, (3) phased project plan + immediate next step, (4) memory node initialization (if claude-cortex installed). Templates are user-customizable for your offerings. Configurable per user via /setup-projects.",
   "author": {
     "name": "BrightWay AI"

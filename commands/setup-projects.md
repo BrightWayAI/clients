@@ -73,8 +73,7 @@ are immutable defaults and are never edited at runtime.
 
 ### Section 5 — Companion plugins
 - Is `cortex` installed? (Y/N — drives whether memory node init runs in Output 4)
-- Is `ops` installed? (Y/N — provides pipeline-analyst for periodic engagement reviews)
-- Is `growth` installed? (Y/N — useful context when engagements originate in its signal pipeline)
+- Is `growth` installed? (Y/N — provides pipeline-analyst for periodic engagement reviews, and useful context when engagements originate in its signal pipeline; if not installed, note "Growth Engine not installed; pipeline analysis skipped")
 
 ---
 

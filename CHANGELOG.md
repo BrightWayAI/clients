@@ -4,6 +4,11 @@ All notable changes to delivery are documented here.
 
 Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match `plugin.json`.
 
+## [0.5.0] — pipeline-analyst ownership moved to growth (2026-09-15)
+
+### Changed
+- `pipeline-analyst` now lives in the `growth` plugin (moved from `ops`). README and `/setup-projects` updated to reference `growth` and report "Growth Engine not installed; pipeline analysis skipped" when growth isn't present.
+
 ## [0.4.0] — renamed to clients (2026-09-15)
 
 ### Changed

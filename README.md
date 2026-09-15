@@ -63,7 +63,8 @@ Copy any template you want to customize into
 ## Companion plugins
 
 - **cortex** — for memory node initialization. If not installed, `/project-setup` skips that output.
-- **ops** — provides `pipeline-analyst` for reviewing recently-signed deals, and brand/CRM config that `/review-deliverable` reads.
+- **growth** — provides `pipeline-analyst` for reviewing recently-signed deals; if growth isn't installed, note "Growth Engine not installed; pipeline analysis skipped."
+- **ops** — brand/CRM config that `/review-deliverable` reads.
 
 Works without them.
 

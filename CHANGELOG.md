@@ -1,8 +1,42 @@
 # Changelog
 
-All notable changes to project-setup are documented here.
+All notable changes to delivery are documented here.
 
 Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match `plugin.json`.
+
+## [0.3.0] — Renamed to delivery, absorbs client-status + review-deliverable (2026-09-15)
+
+Nucleus Operating Model Refactor Phase 3 step 3.3. `project-setup` renamed to
+`delivery` and now covers the whole client engagement lifecycle: start, status,
+QA.
+
+### Added
+- `/client-status` and `/setup-status` (moved from the retired `client-status`
+  plugin, unchanged) — weekly client-facing status draft generation.
+- `/review-deliverable` (moved from `core-ops`, unchanged) — structured QA pass
+  on a client deliverable against the user's brand guide. Reads brand/CRM
+  config cross-plugin from `core-ops.user-context.md`, same pattern
+  `relationships` already uses for CRM config.
+
+### Changed
+- Plugin renamed `project-setup` → `delivery`; repository renamed
+  `BrightWayAI/project-setup` → `BrightWayAI/delivery` (GitHub redirects the
+  old URL).
+- `references/client-status-user-context.template.md` — renamed from
+  `client-status`'s `user-context.template.md` to avoid a filename collision
+  with this plugin's own template.
+- Fixed stale legacy paths in `commands/project-setup.md` and
+  `commands/client-status.md` — `~/Documents/Claude/identity.md` /
+  `voice.md` / `memory/client/` / `memory/DASHBOARD.md` now correctly read
+  `<config-root>/memory/me/identity.md`, `<config-root>/memory/me/voice.md`,
+  `<config-root>/memory/client/`, `<config-root>/memory/DASHBOARD.md`. These
+  were pre-existing bugs in the source plugins, predating the `<config-root>`
+  convention; fixed opportunistically while porting.
+
+### Removed
+- Duplicate generic `skills/setup/SKILL.md` — this plugin already had
+  `skills/setup-projects/SKILL.md` covering the same ground; the redundant
+  `client-status` equivalent was not copied over.
 
 ## [0.2.6] — Identity/voice moved to memory/me/ (2026-09-15)
 

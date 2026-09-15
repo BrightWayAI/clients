@@ -1,10 +1,10 @@
 {
-  "name": "project-setup",
-  "version": "0.2.6",
-  "description": "Initialize a new client engagement end-to-end. Interviews you about the engagement, then produces: (1) Drive folder structure, (2) Claude Project system prompt ready to paste, (3) phased project plan + immediate next step, (4) memory node initialization (if claude-cortex installed). Templates are user-customizable for your offerings. Configurable per user via /setup-projects.",
+  "name": "delivery",
+  "version": "0.3.0",
+  "description": "Client engagement lifecycle: start, status, QA. /project-setup initializes a new engagement end-to-end (Drive structure, Claude Project prompt, phased plan, memory node). /client-status drafts weekly client-facing status updates. /review-deliverable runs a structured brand/quality QA pass before you ship. Renamed from project-setup, 2026-09-15 — absorbs client-status and core-ops's review-deliverable.",
   "author": {
     "name": "BrightWay AI"
   },
   "license": "MIT",
-  "repository": "https://github.com/BrightWayAI/project-setup"
+  "repository": "https://github.com/BrightWayAI/delivery"
 }

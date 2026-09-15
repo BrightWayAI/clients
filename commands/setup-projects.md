@@ -6,6 +6,8 @@ description: Configure project-setup for your offerings, drive layout, and compa
 
 Short interview that captures the catalog `/project-setup` needs to be useful for your firm.
 
+**Quick path:** if the user wants minimum-viable defaults to start, write a placeholder `<config-root>/plugins/project-setup.user-context.md` with one generic "Consulting Engagement" offering. The plugin will work but outputs will be generic — recommend running the full interview when ready to capture real offerings.
+
 ---
 
 ## Step 0 — Resolve plugin config root

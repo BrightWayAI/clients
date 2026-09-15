@@ -110,7 +110,7 @@ Generate a phased delivery plan tailored to the active offering, using `referenc
 
 **Only if `claude-cortex` is installed** (per user-context).
 
-Memory lives at `~/Documents/Claude/memory/`. Create the node file at `~/Documents/Claude/memory/client/[client-name-lowercase].md` using this structure:
+Memory lives at `<config-root>/memory/`. Create the node file at `<config-root>/memory/client/[client-name-lowercase].md` using this structure:
 
 ```markdown
 # client:[client-name-lowercase]
@@ -142,7 +142,7 @@ client:[client-name-lowercase] LOG [today] — Project initialized: Offering: [o
 ## Signals
 ```
 
-Also update `~/Documents/Claude/memory/DASHBOARD.md` — add the new node to the Active Nodes section.
+Also update `<config-root>/memory/DASHBOARD.md` — add the new node to the Active Nodes section.
 
 After committing, confirm: "Memory node `client:[name]` created — future sessions will have context on this engagement from the start."
 

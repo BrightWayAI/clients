@@ -1,14 +1,14 @@
 {
-  "name": "project-setup",
-  "version": "0.2.5",
-  "description": "Create an engagement plan, portable AI workspace prompt, folder blueprint, next action, and optional Cortex nodes from approved inputs.",
+  "name": "delivery",
+  "version": "0.3.0",
+  "description": "Client engagement lifecycle: start (project-setup), status (client-status), QA (review-deliverable). Renamed from project-setup, 2026-09-15.",
   "author": {
     "name": "BrightWay AI",
     "url": "https://brightwayai.com"
   },
   "license": "MIT",
-  "homepage": "https://github.com/BrightWayAI/project-setup",
-  "repository": "https://github.com/BrightWayAI/project-setup",
+  "homepage": "https://github.com/BrightWayAI/delivery",
+  "repository": "https://github.com/BrightWayAI/delivery",
   "keywords": [
     "nucleus",
     "chatgpt",
@@ -16,9 +16,9 @@
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "Project Setup",
-    "shortDescription": "Initialize a client engagement from one guided interview",
-    "longDescription": "Create an engagement plan, portable AI workspace prompt, folder blueprint, next action, and optional Cortex nodes from approved inputs.",
+    "displayName": "Delivery",
+    "shortDescription": "Start, status-update, and QA a client engagement",
+    "longDescription": "Create an engagement plan, portable AI workspace prompt, folder blueprint, next action, and optional Cortex nodes from approved inputs. Draft weekly client status updates. Run structured brand/quality QA on deliverables before you ship.",
     "developerName": "BrightWay AI",
     "category": "Productivity",
     "capabilities": [
@@ -26,11 +26,11 @@
       "Write",
       "Interactive"
     ],
-    "websiteURL": "https://github.com/BrightWayAI/project-setup",
+    "websiteURL": "https://github.com/BrightWayAI/delivery",
     "defaultPrompt": [
       "Set up a new client project.",
-      "Configure my engagement templates.",
-      "Create a kickoff plan for this engagement."
+      "Draft this week's client status updates.",
+      "Review this deliverable before I send it."
     ]
   }
 }

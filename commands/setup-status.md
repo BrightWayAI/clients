@@ -17,7 +17,7 @@ plugin-specific pointer.
 
 ### Read shared identity and voice
 
-Read `<config-root>/memory/me/identity.md` (cortex's `/setup-identity`) and `<config-root>/memory/me/voice.md` (cortex's `/setup-voice`). If both are populated, you have most of what's needed for tone — only ask about cadence and delivery below. If missing, offer to run those commands first or proceed inline.
+Read `<config-root>/memory/me/identity.md` (cortex's `/setup-identity`) and `<config-root>/memory/me/voice.md` (comms's `/setup-voice`). If both are populated, you have most of what's needed for tone — only ask about cadence and delivery below. If missing, offer to run those commands first or proceed inline.
 
 For the rest of this document, **`<config-root>`** refers to the resolved path. This plugin's status config lives at **`<config-root>/plugins/clients-status.user-context.md`**.
 

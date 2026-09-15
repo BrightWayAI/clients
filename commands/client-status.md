@@ -68,7 +68,7 @@ In parallel where possible:
 
 ## Step 3 — Draft the status update
 
-Use `references/templates/status-template.md` as the structure. Apply per-client overrides from user-context. Read `<config-root>/memory/me/voice.md` for voice rules.
+Use `references/templates/status-template.md` as the structure. Apply per-client overrides from user-context. Read `<config-root>/memory/me/voice.md` for voice rules. If `voice.md` doesn't exist, don't stop — draft in a generic tone and note in the response: "No voice file found — using generic tone; run comms's `/setup-voice` to fix this."
 
 Default sections (template-defined, user-editable):
 

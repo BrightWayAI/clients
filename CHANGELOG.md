@@ -4,6 +4,12 @@ All notable changes to delivery are documented here.
 
 Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match `plugin.json`.
 
+## [0.6.0] — `/setup-voice` ownership moves to Comms Desk (2026-09-15)
+
+### Changed
+- `commands/setup-status.md` updated to attribute `/setup-voice` to `comms` instead of `cortex`.
+- `commands/client-status.md` Step 3 now degrades gracefully with an explicit "No voice file found — using generic tone; run comms's `/setup-voice` to fix this" message when `<config-root>/memory/me/voice.md` doesn't exist, instead of silently assuming it's present.
+
 ## [0.5.0] — pipeline-analyst ownership moved to growth (2026-09-15)
 
 ### Changed

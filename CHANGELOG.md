@@ -4,6 +4,19 @@ All notable changes to delivery are documented here.
 
 Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match `plugin.json`.
 
+## [0.3.1] — Skill auto-invocation audit (2026-09-15)
+
+Nucleus Operating Model Refactor Phase 3 step 3.7. Ritual and side-effecting
+skills marked `disable-model-invocation: true` so they only run on explicit
+invocation, not loose natural-language matching — the model can still be
+asked to run them by name. Read-mostly, low-stakes, or high-frequency
+conversational skills are left auto-invocable. Marketplace-wide this brings
+model-invocable skills from ~81 to 27, under the ≤30 target audited with
+`/skill-doctor`.
+
+### Changed
+- Marked `disable-model-invocation: true` on: `project-setup`, `setup-projects`, `setup-status`.
+
 ## [0.3.0] — Renamed to delivery, absorbs client-status + review-deliverable (2026-09-15)
 
 Nucleus Operating Model Refactor Phase 3 step 3.3. `project-setup` renamed to

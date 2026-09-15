@@ -1,4 +1,5 @@
 ---
+disable-model-invocation: true
 name: setup-projects
 description: "Configure project-setup for your offerings, drive layout, and companion-plugin integrations. Writes to `<config-root>/plugins/project-setup.user-context.md` (where `<config-root>` is the folder you choose during first-time setup, stored at `~/Documents/.claude-plugin-config-root`). Re-run anytime to add or update offerings."
 ---

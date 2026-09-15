@@ -1,4 +1,5 @@
 ---
+disable-model-invocation: true
 name: setup-status
 description: "Configure client-status for your cadence, voice match, status template, per-client overrides, and delivery channel. Re-run anytime to update."
 ---

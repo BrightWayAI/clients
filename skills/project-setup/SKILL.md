@@ -1,4 +1,5 @@
 ---
+disable-model-invocation: true
 name: project-setup
 description: Initialize a new client engagement end-to-end. Auto-fires on "/project-setup", "set up a new project", "new client just signed", "onboard [client name]", "get [client] set up", "new engagement", "contract signed", "initialize [client] project", or any variation where the user is starting work with a new client. Also fires on client name + words like "kickoff", "starting", or "beginning". Produces Drive folder structure, Claude Project system prompt, phased project plan with immediate next step, and a memory node (if claude-cortex is installed).
 ---

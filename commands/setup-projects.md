@@ -1,12 +1,12 @@
 ---
-description: Configure Delivery for offerings, drive layout, and companion-plugin integrations. Writes to `<config-root>/plugins/delivery.user-context.md` using the shared vendor-neutral config-root resolver. Re-run anytime to add or update offerings.
+description: Configure Client Success for offerings, drive layout, and companion-plugin integrations. Writes to `<config-root>/plugins/clients.user-context.md` using the shared vendor-neutral config-root resolver. Re-run anytime to add or update offerings.
 ---
 
 # /setup-projects
 
 Short interview that captures the catalog `/project-setup` needs to be useful for your firm.
 
-**Quick path:** if the user wants minimum-viable defaults to start, write a placeholder `<config-root>/plugins/delivery.user-context.md` with one generic "Consulting Engagement" offering. The plugin will work but outputs will be generic — recommend running the full interview when ready to capture real offerings.
+**Quick path:** if the user wants minimum-viable defaults to start, write a placeholder `<config-root>/plugins/clients.user-context.md` with one generic "Consulting Engagement" offering. The plugin will work but outputs will be generic — recommend running the full interview when ready to capture real offerings.
 
 ---
 
@@ -24,16 +24,16 @@ Read `<config-root>/memory/me/identity.md` (the canonical identity file populate
 - **Exists and populated** → pre-fill Section 1 (Identity) of this interview from those values. Skip those questions; just confirm what you read.
 - **Missing** → offer: "Want to capture name/company/role/tools once via `/setup-identity` (in cortex) so all marketplace plugins can read it? Or capture identity inline here only?" Route to `/setup-identity` if user prefers, then resume.
 
-For the rest of this document, **`<config-root>`** refers to the resolved path. This plugin's config file lives at **`<config-root>/plugins/delivery.user-context.md`**.
+For the rest of this document, **`<config-root>`** refers to the resolved path. This plugin's config file lives at **`<config-root>/plugins/clients.user-context.md`**.
 
 ---
 
 ## Step 1 — Check for existing config
 
-Read `<config-root>/plugins/delivery.user-context.md`. Populated → ask whether to
+Read `<config-root>/plugins/clients.user-context.md`. Populated → ask whether to
 update. If missing, check the former
 `<config-root>/plugins/project-setup.user-context.md` path once and offer to import
-it into the canonical Delivery file without deleting the old file. <!-- LEGACY_COMPAT -->
+it into the canonical Client Success file without deleting the old file. <!-- LEGACY_COMPAT -->
 
 ---
 
@@ -63,7 +63,7 @@ For each offering, capture:
 Repeat for each offering. (If the user has 1 offering, that's fine. If 3+, work through them one at a time.)
 
 After capturing, copy any customized templates to
-`<config-root>/plugins/delivery/templates/`. Bundled `references/templates/` files
+`<config-root>/plugins/clients/templates/`. Bundled `references/templates/` files
 are immutable defaults and are never edited at runtime.
 
 ### Section 4 — Communication defaults
@@ -72,18 +72,18 @@ are immutable defaults and are never edited at runtime.
 - Tools you typically use to communicate with clients (Email / Slack / Teams / etc.)
 
 ### Section 5 — Companion plugins
-- Is `claude-cortex` installed? (Y/N — drives whether memory node init runs in Output 4)
-- Is `core-ops` installed? (Y/N — provides pipeline-analyst for periodic engagement reviews)
-- Is `relationships` installed? (Y/N — useful context when engagements originate in its signal pipeline)
+- Is `cortex` installed? (Y/N — drives whether memory node init runs in Output 4)
+- Is `ops` installed? (Y/N — provides pipeline-analyst for periodic engagement reviews)
+- Is `growth` installed? (Y/N — useful context when engagements originate in its signal pipeline)
 
 ---
 
 ## Step 3 — Write the config
 
-Populate `<config-root>/plugins/delivery.user-context.md`:
+Populate `<config-root>/plugins/clients.user-context.md`:
 
 ```markdown
-# delivery user context
+# clients user context
 
 _Last updated: [date]_
 
@@ -111,9 +111,9 @@ _Last updated: [date]_
 - **Communication tools:** ...
 
 ## Companion plugins
-- **claude-cortex:** ...
-- **core-ops:** ...
-- **relationships:** ...
+- **cortex:** ...
+- **ops:** ...
+- **growth:** ...
 ```
 
 ---
@@ -121,7 +121,7 @@ _Last updated: [date]_
 ## Step 4 — Create user-owned template overrides
 
 Preview proposed copies of `project-plans.md` and `drive-structure.md` beneath
-`<config-root>/plugins/delivery/templates/`. Suggest specific edits based on the
+`<config-root>/plugins/clients/templates/`. Suggest specific edits based on the
 offerings captured and write only after confirmation.
 
 The immutable starter templates ship with three example offerings (AI Operating Model, Custom Agent Systems, Learning Production System). User-owned overrides can:
@@ -143,4 +143,4 @@ Summarize. Offer:
 - One section at a time.
 - For Section 3 (offerings catalog), be patient — this is the most important section. The plugin is generic only if the offerings are well-captured.
 - Idempotent — re-running adds new offerings or updates existing ones.
-- Never edit bundled files in the installed plugin directory. All customizations live under `<config-root>/plugins/delivery/`.
+- Never edit bundled files in the installed plugin directory. All customizations live under `<config-root>/plugins/clients/`.

@@ -1,7 +1,7 @@
 ---
 disable-model-invocation: true
 name: setup-projects
-description: "Configure Delivery for offerings, drive layout, and companion-plugin integrations. Writes to `<config-root>/plugins/delivery.user-context.md` using the shared vendor-neutral config-root resolver. Re-run anytime to add or update offerings."
+description: "Configure Client Success for offerings, drive layout, and companion-plugin integrations. Writes to `<config-root>/plugins/clients.user-context.md` using the shared vendor-neutral config-root resolver. Re-run anytime to add or update offerings."
 ---
 
 # setup-projects

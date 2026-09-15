@@ -1,7 +1,7 @@
 {
-  "name": "delivery",
-  "version": "0.3.4",
-  "description": "Create an engagement plan, portable AI workspace prompt, folder blueprint, and next action; draft weekly client-status updates; and run structured deliverable QA.",
+  "name": "clients",
+  "version": "0.4.0",
+  "description": "Client Success. Create an engagement plan, portable AI workspace prompt, folder blueprint, and next action; draft weekly client-status updates; and run structured deliverable QA.",
   "author": {
     "name": "BrightWay AI",
     "url": "https://brightwayai.com"
@@ -16,7 +16,7 @@
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "Delivery",
+    "displayName": "Client Success",
     "shortDescription": "Start, status-update, and QA a client engagement",
     "longDescription": "Create an engagement plan, portable AI workspace prompt, folder blueprint, and next action; draft weekly client-status updates; and run structured deliverable QA.",
     "developerName": "BrightWay AI",

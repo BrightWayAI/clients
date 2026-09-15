@@ -1,10 +1,10 @@
 ---
-description: Configure Delivery status drafting for cadence, voice match, user-owned template overrides, per-client rules, and delivery channel. Writes `<config-root>/plugins/delivery-status.user-context.md`. Re-run anytime to update.
+description: Configure Client Success status drafting for cadence, voice match, user-owned template overrides, per-client rules, and delivery channel. Writes `<config-root>/plugins/clients-status.user-context.md`. Re-run anytime to update.
 ---
 
 # /setup-status
 
-Short interview that captures what Delivery needs to draft useful client updates.
+Short interview that captures what Client Success needs to draft useful client updates.
 
 ---
 
@@ -19,7 +19,7 @@ plugin-specific pointer.
 
 Read `<config-root>/memory/me/identity.md` (cortex's `/setup-identity`) and `<config-root>/memory/me/voice.md` (cortex's `/setup-voice`). If both are populated, you have most of what's needed for tone — only ask about cadence and delivery below. If missing, offer to run those commands first or proceed inline.
 
-For the rest of this document, **`<config-root>`** refers to the resolved path. This plugin's status config lives at **`<config-root>/plugins/delivery-status.user-context.md`**.
+For the rest of this document, **`<config-root>`** refers to the resolved path. This plugin's status config lives at **`<config-root>/plugins/clients-status.user-context.md`**.
 
 If the canonical file is missing, check
 `<config-root>/plugins/client-status.user-context.md` once and offer to import it
@@ -39,7 +39,7 @@ without deleting the old file. <!-- LEGACY_COMPAT -->
 
 The plugin ships with an immutable starter at `references/templates/status-template.md`.
 Customized copies live at
-`<config-root>/plugins/delivery/templates/status-template.md`. The default structure:
+`<config-root>/plugins/clients/templates/status-template.md`. The default structure:
 What we did / What we learned / What's next / Anything we need from you.
 
 Ask:
@@ -54,13 +54,13 @@ Some clients prefer different formats. Ask:
 - Any clients that want a longer / shorter / different format? (capture per-client overrides)
 - Any clients that should be EXCLUDED from automatic drafting? (e.g., a client who prefers no weekly updates)
 
-If Delivery has configured engagements, walk through each active engagement to capture overrides.
+If Client Success has configured engagements, walk through each active engagement to capture overrides.
 
 ---
 
 ## Step 4 — Optional inclusions
 
-- **Time-tracking hours** — if `time-tracking` plugin is installed, do you want hours logged per client included in the update? (Y/N, default N — most clients don't need that level of transparency)
+- **Time-tracking hours** — if `admin` plugin is installed, do you want hours logged per client included in the update? (Y/N, default N — most clients don't need that level of transparency)
 - **Thought-leadership shares** — should drafts include a "relevant share" section (an article / framework / insight tied to their work)? (Y/N, default N)
 - **Auto-send** — leave default off. The plugin always drafts and waits for review. (Documented for clarity, not configurable.)
 
@@ -75,7 +75,7 @@ If Delivery has configured engagements, walk through each active engagement to c
 
 ## Step 6 — Write config
 
-Populate `<config-root>/plugins/delivery-status.user-context.md` per the template structure.
+Populate `<config-root>/plugins/clients-status.user-context.md` per the template structure.
 
 ---
 

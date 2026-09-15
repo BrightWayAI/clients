@@ -1,4 +1,4 @@
-# delivery status user context (TEMPLATE)
+# clients status user context (TEMPLATE)
 
 _Run `/setup-status` to generate your real `references/user-context.md` (gitignored)._
 
@@ -21,6 +21,6 @@ _Last updated: [filled by setup]_
 - **Time-tracking hours:** [Y/N]
 - **Thought-leadership shares:** [Y/N]
 
-## Delivery
+## Client Success
 - **Default channel:** [email / Slack / portal / Drive]
 - **Per-client channel overrides:** [if any]

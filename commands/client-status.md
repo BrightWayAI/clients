@@ -1,5 +1,5 @@
 ---
-description: Draft weekly status updates for active client engagements. Pulls from cortex memory, Delivery engagement data, calendar (this week's meetings), CRM activity, and optionally time-tracking. Produces a draft per client ready for your review and send. Run weekly (Friday afternoon or Monday morning, per your cadence).
+description: Draft weekly status updates for active client engagements. Pulls from cortex memory, Client Success engagement data, calendar (this week's meetings), CRM activity, and optionally admin (time-tracking). Produces a draft per client ready for your review and send. Run weekly (Friday afternoon or Monday morning, per your cadence).
 ---
 
 # /client-status [client?]
@@ -10,12 +10,12 @@ Weekly client status update drafting. The plugin reads everything you already ha
 
 ## Step 0 — Preflight
 
-Read `<config-root>/plugins/delivery-status.user-context.md`. If missing, route to `/setup-status` and stop. Read shared identity at `<config-root>/memory/me/identity.md` and shared voice at `<config-root>/memory/me/voice.md`.
+Read `<config-root>/plugins/clients-status.user-context.md`. If missing, route to `/setup-status` and stop. Read shared identity at `<config-root>/memory/me/identity.md` and shared voice at `<config-root>/memory/me/voice.md`.
 
 Extract from this plugin's user-context:
 - Cadence (weekly / bi-weekly / monthly)
 - Day-of-week to send
-- Status template path (prefer `<config-root>/plugins/delivery/templates/status-template.md`; fallback `references/templates/status-template.md`)
+- Status template path (prefer `<config-root>/plugins/clients/templates/status-template.md`; fallback `references/templates/status-template.md`)
 - Per-client overrides (length, sections to skip, etc.)
 - Delivery channel
 - Whether to include time-tracking hours (Y/N — default N)
@@ -27,8 +27,8 @@ Extract from this plugin's user-context:
 If `/client-status [client]` was called with a specific client name → just that one.
 
 Otherwise → all active engagements:
-- If Delivery is configured: read `<config-root>/plugins/delivery.user-context.md` and active engagements
-- If `claude-cortex` is installed: list nodes under `client:` prefix that are Active or Warm (per cortex's freshness markers)
+- If Client Success is configured: read `<config-root>/plugins/clients.user-context.md` and active engagements
+- If `cortex` is installed: list nodes under `client:` prefix that are Active or Warm (per cortex's freshness markers)
 - Else: ask the user "Which clients?" with a free-form list
 
 ---
@@ -46,7 +46,7 @@ In parallel where possible:
   - Open threads tagged with [WAITING:Client] or [ASK]
   - P0 / P1 next actions
 
-**B. Delivery engagement data** (if configured)
+**B. Client Success engagement data** (if configured)
 - Engagement name, current phase, phase goal
 - Deliverables completed this period
 - Upcoming milestones (next 2 weeks)
@@ -136,7 +136,7 @@ If yes: add a CHANGELOG entry to each client's memory node ("Sent weekly status 
 
 After the user confirms a status update was sent (or, optionally, when a draft is produced), update the primary contact's person page if it exists.
 
-For each engagement's primary contact (from Delivery's user-context if present, or the most-engaged contact in CRM):
+For each engagement's primary contact (from Client Success's user-context if present, or the most-engaged contact in CRM):
 
 1. Resolve `<config-root>` via the standard pointer.
 2. Compute slug: `firstname-lastname`.
@@ -156,7 +156,7 @@ If cortex isn't installed, skip silently.
 - **Honor voice.** Read `<config-root>/memory/me/voice.md` first. If the user's voice is "warm, direct, low-jargon," don't ship a corporate-speak update.
 - **Keep it scannable.** Clients skim. Bullets > paragraphs. Lead with verbs.
 - **No padding.** If a client had a quiet week, the update should be short. "Nothing major to report; we're on track for [next milestone]" is honest and respectful of the client's time.
-- **Don't overpromise in "What's next."** Use language from Delivery phase plans, not aspirational stretch goals.
+- **Don't overpromise in "What's next."** Use language from Client Success phase plans, not aspirational stretch goals.
 
 ## Edge cases
 
@@ -168,5 +168,5 @@ If cortex isn't installed, skip silently.
 ## What this is NOT for
 
 - **Quarterly business reviews / formal QBRs** — those are bigger artifacts. Use this for weekly cadence touches.
-- **One-off updates** — for a specific milestone hit or scope change, draft it directly with Delivery and keep it review-only.
+- **One-off updates** — for a specific milestone hit or scope change, draft it directly with Client Success and keep it review-only.
 - **Internal status reports** — this is for client-facing updates only.

@@ -12,7 +12,7 @@ This is a slash command, not a subagent — the review runs inline in your conve
 
 ## Step 1 — Load brand context
 
-Read `<config-root>/plugins/core-ops.user-context.md` from the core-ops plugin directory. Extract:
+Read `<config-root>/plugins/ops.user-context.md` from the ops plugin directory. Extract:
 
 - Brand colors, typography, voice/tone rules, banned phrases
 - Path to the canonical brand guide (PDF, Drive doc, Notion page, etc.)

@@ -1,7 +1,7 @@
 ---
 disable-model-invocation: true
 name: project-setup
-description: Initialize a new client engagement end-to-end. Auto-fires on "/project-setup", "set up a new project", "new client just signed", "onboard [client name]", "get [client] set up", "new engagement", "contract signed", "initialize [client] project", or any variation where the user is starting work with a new client. Also fires on client name + words like "kickoff", "starting", or "beginning". Produces Drive folder structure, Claude Project system prompt, phased project plan with immediate next step, and a memory node (if claude-cortex is installed).
+description: Initialize a new client engagement end-to-end. Auto-fires on "/project-setup", "set up a new project", "new client just signed", "onboard [client name]", "get [client] set up", "new engagement", "contract signed", "initialize [client] project", or any variation where the user is starting work with a new client. Also fires on client name + words like "kickoff", "starting", or "beginning". Produces Drive folder structure, Claude Project system prompt, phased project plan with immediate next step, and a memory node (if cortex is installed).
 ---
 
 <!-- OPENAI-ADAPTER:START -->
@@ -24,7 +24,7 @@ See `commands/project-setup.md` for the full workflow.
 
 ## Pre-flight check
 
-Confirm `<config-root>/plugins/delivery.user-context.md` exists with at least one offering configured. If missing, route to `/setup-projects` first — without an offerings catalog and template customizations, the outputs will be generic.
+Confirm `<config-root>/plugins/clients.user-context.md` exists with at least one offering configured. If missing, route to `/setup-projects` first — without an offerings catalog and template customizations, the outputs will be generic.
 
 ## What this skill is *not* for
 

@@ -1,18 +1,18 @@
-# delivery
+# clients
 
 Client engagement lifecycle for Claude (Cowork + Claude Code): start, status, QA.
 
 The plugin covering the full arc of a client engagement — from kickoff through
 weekly status updates to shipping a reviewed deliverable. Renamed from
 `project-setup`, 2026-09-15 — absorbs the retired `client-status` plugin and
-core-ops's `/review-deliverable`.
+ops's `/review-deliverable`.
 
 ## What it does
 
 - **`/project-setup`** — a new client signs, you run this. Interviews you about
   the engagement and generates: Drive folder structure, a Claude Project system
   prompt, a phased project plan with an immediate next step, and (if
-  `claude-cortex` is installed) a memory node so every future session has
+  `cortex` is installed) a memory node so every future session has
   context from day one.
 - **`/client-status`** — drafts a weekly client-facing status update from
   recent activity.
@@ -27,7 +27,7 @@ Recommended: via the [BrightWayAI marketplace](https://github.com/BrightWayAI/nu
 
 ```
 /plugin marketplace add BrightWayAI/nucleus
-/plugin install delivery@nucleus
+/plugin install clients@nucleus
 ```
 
 ## First-time setup
@@ -37,16 +37,16 @@ Run `/setup-projects`. Captures:
 - **Identity** — you, your company, what you do
 - **Offerings** — your service offerings, with names, durations, and which template applies to each
 - **Drive layout** — where Active Clients lives, naming conventions, folder structure preferences
-- **Memory** — whether claude-cortex is installed (drives whether memory init runs)
+- **Memory** — whether cortex is installed (drives whether memory init runs)
 - **Communication defaults** — your default cadence for client comms
 
 Run `/setup-status` to configure `/client-status`.
 
-`/review-deliverable` reads brand/CRM config from `core-ops.user-context.md`
-cross-plugin (same pattern `relationships` uses) — no separate setup step.
+`/review-deliverable` reads brand/CRM config from `ops.user-context.md`
+cross-plugin (same pattern `growth` uses) — no separate setup step.
 
-Saved to `<config-root>/plugins/delivery.user-context.md` and
-`<config-root>/plugins/delivery-status.user-context.md`.
+Saved to `<config-root>/plugins/clients.user-context.md` and
+`<config-root>/plugins/clients-status.user-context.md`.
 
 ## Customizing templates
 
@@ -58,12 +58,12 @@ The plugin ships with **starter templates** in `references/templates/`:
 - `status-template.md` — weekly status update structure
 
 Copy any template you want to customize into
-`<config-root>/plugins/delivery/templates/`. Bundled references remain immutable.
+`<config-root>/plugins/clients/templates/`. Bundled references remain immutable.
 
 ## Companion plugins
 
-- **claude-cortex** — for memory node initialization. If not installed, `/project-setup` skips that output.
-- **core-ops** — provides `pipeline-analyst` for reviewing recently-signed deals, and brand/CRM config that `/review-deliverable` reads.
+- **cortex** — for memory node initialization. If not installed, `/project-setup` skips that output.
+- **ops** — provides `pipeline-analyst` for reviewing recently-signed deals, and brand/CRM config that `/review-deliverable` reads.
 
 Works without them.
 
@@ -96,9 +96,9 @@ references/
 <!-- OPENAI-SUPPORT:START -->
 ## ChatGPT and Codex
 
-Delivery ships as a native OpenAI plugin as well as a Claude plugin. In
-ChatGPT desktop Local Work, enable **Delivery** and ask naturally or mention
-`@Delivery`. In Codex, use natural language or the namespaced skills exposed
+Client Success ships as a native OpenAI plugin as well as a Claude plugin. In
+ChatGPT desktop Local Work, enable **Client Success** and ask naturally or mention
+`@ClientSuccess`. In Codex, use natural language or the namespaced skills exposed
 by the plugin. Claude slash-command names in this README remain workflow aliases.
 
 All hosts resolve the same `<config-root>` used by Cortex, so Claude, ChatGPT desktop,

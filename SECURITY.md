@@ -2,7 +2,7 @@
 
 ## What this plugin does with your data
 
-Delivery manages new-engagement setup, client-status drafting, and deliverable QA. It writes only user-owned local configuration and confirmed Cortex memory updates.
+Client Success manages new-engagement setup, client-status drafting, and deliverable QA. It writes only user-owned local configuration and confirmed Cortex memory updates.
 
 **Reads:**
 - **Information from the user during the interview** (no automated reads).
@@ -11,8 +11,8 @@ Delivery manages new-engagement setup, client-status drafting, and deliverable Q
 - **Shared private profile** — `<config-root>/memory/me/identity.md` and `voice.md` (read-only).
 
 **Writes:**
-- **Plugin settings** — `<config-root>/plugins/delivery.user-context.md` and `delivery-status.user-context.md`.
-- **Template overrides** — `<config-root>/plugins/delivery/templates/`.
+- **Plugin settings** — `<config-root>/plugins/clients.user-context.md` and `clients-status.user-context.md`.
+- **Template overrides** — `<config-root>/plugins/clients/templates/`.
 - **Memory node** (only if Cortex is installed and the user confirms) — `<config-root>/memory/client/[client-name].md` plus a small entry in `DASHBOARD.md`.
 - **Outputs in the conversation** — Drive folder structure (text only; user creates manually), Claude Project system prompt (copy-paste ready), phased project plan, immediate next step.
 

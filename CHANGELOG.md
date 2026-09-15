@@ -4,6 +4,11 @@ All notable changes to delivery are documented here.
 
 Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match `plugin.json`.
 
+## [0.4.0] — renamed to clients (2026-09-15)
+
+### Changed
+- Renamed from `delivery` to `clients` (display name: Client Success) as part of the 2026-09-15 Nucleus plugin rename. Old plugin ID/repo name redirects; see marketplace catalog. This is the second rename in this plugin's history — it was previously renamed in-place from `project-setup` to `delivery`, also on 2026-09-15.
+
 ## [0.3.4] — canonical Delivery state ownership (2026-09-15)
 
 ### Changed

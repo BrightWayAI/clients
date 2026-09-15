@@ -1,4 +1,4 @@
-# delivery user context (TEMPLATE)
+# clients user context (TEMPLATE)
 
 _Run `/setup-projects` to generate your real `references/user-context.md` (gitignored)._
 
@@ -28,6 +28,6 @@ _Last updated: [filled by setup]_
 - **Communication tools:** [Email / Slack / Teams / etc.]
 
 ## Companion plugins
-- **claude-cortex:** [installed / not installed]
-- **core-ops:** [installed / not installed]
-- **relationships:** [installed / not installed]
+- **cortex:** [installed / not installed]
+- **ops:** [installed / not installed]
+- **growth:** [installed / not installed]

@@ -24,7 +24,7 @@ See `commands/review-deliverable.md` for the full review workflow.
 
 ## Pre-flight check
 
-Before running the review, confirm `<config-root>/plugins/core-ops.user-context.md` exists. If it doesn't, route to `/setup-core` first — the review is much sharper with brand context loaded.
+Before running the review, confirm `<config-root>/plugins/ops.user-context.md` exists. If it doesn't, route to `/setup-core` first — the review is much sharper with brand context loaded.
 
 ## What this skill is *not* for
 

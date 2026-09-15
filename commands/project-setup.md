@@ -1,5 +1,5 @@
 ---
-description: Initialize a new client engagement end-to-end. Interviews you about the engagement, then produces Drive folder structure, Claude Project system prompt, phased project plan with immediate next step, and (if claude-cortex is installed) a memory node so future sessions have context from day one.
+description: Initialize a new client engagement end-to-end. Interviews you about the engagement, then produces Drive folder structure, Claude Project system prompt, phased project plan with immediate next step, and (if cortex is installed) a memory node so future sessions have context from day one.
 ---
 
 # /project-setup
@@ -10,19 +10,19 @@ End-to-end client engagement initialization. A new client signs → run this com
 
 ## Step 0 — Preflight
 
-Read `<config-root>/plugins/delivery.user-context.md`. If missing, route to `/setup-projects` and stop.
+Read `<config-root>/plugins/clients.user-context.md`. If missing, route to `/setup-projects` and stop.
 
 Extract:
 - Identity (your name, company, what you do)
 - Offerings catalog (your service offerings, with names and durations)
 - Drive layout (where Active Clients lives, naming conventions)
-- Companion plugins (cortex installed → run memory init; core-ops installed → can pull pipeline context)
+- Companion plugins (cortex installed → run memory init; ops installed → can pull pipeline context)
 - Communication defaults (default cadence, response time)
 
 Read user-owned template overrides when present, otherwise the bundled defaults:
-- `<config-root>/plugins/delivery/templates/drive-structure.md` → fallback `references/templates/drive-structure.md`
-- `<config-root>/plugins/delivery/templates/claude-project-prompt.md` → fallback `references/templates/claude-project-prompt.md`
-- `<config-root>/plugins/delivery/templates/project-plans.md` → fallback `references/templates/project-plans.md`
+- `<config-root>/plugins/clients/templates/drive-structure.md` → fallback `references/templates/drive-structure.md`
+- `<config-root>/plugins/clients/templates/claude-project-prompt.md` → fallback `references/templates/claude-project-prompt.md`
+- `<config-root>/plugins/clients/templates/project-plans.md` → fallback `references/templates/project-plans.md`
 
 Bundled defaults:
 - `references/templates/drive-structure.md`
@@ -114,7 +114,7 @@ Generate a phased delivery plan tailored to the active offering, using `referenc
 
 ### Output 4: Memory node initialization
 
-**Only if `claude-cortex` is installed** (per user-context).
+**Only if `cortex` is installed** (per user-context).
 
 Memory lives at `<config-root>/memory/`. Create the node file at `<config-root>/memory/client/[client-name-lowercase].md` using this structure:
 

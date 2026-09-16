@@ -28,6 +28,12 @@ ops's `/review-deliverable`.
   `--client`, `--phase`, and `--amendment` (for addenda to an existing
   SOW/MSA).
 
+The SOW scripts declare `python-docx` through PEP 723. Run them with `uv run`
+for an isolated dependency environment; `scripts/requirements-sow.txt` is the
+fallback for hosts without `uv`. ChatGPT and Codex use their document-artifact
+renderer when available and must visually review every rendered page before
+delivery.
+
 ## Install
 
 Recommended: via the [BrightWayAI marketplace](https://github.com/BrightWayAI/nucleus).
@@ -101,17 +107,29 @@ skills/
   sow/SKILL.md                Auto-fires on "draft an SOW" phrases
 scripts/
   sow_extract.py              docx → FORMAT SPEC + SECTION SKELETON (python-docx)
-  sow_build.py                Renders a .docx from the derived format spec
+  sow_build.py                Renders structured JSON to .docx from the derived spec
+  requirements-sow.txt        Dependency fallback for hosts without uv
 references/
   user-context.template.md              Project-setup config structure (committed)
   client-status-user-context.template.md Client-status config structure (committed)
   sow-format-default.md                 Generic SOW styling, used only absent a sample
+  sow-content-schema.md                 Deterministic JSON input contract for the builder
   templates/
     drive-structure.md       Folder layouts (committed; user-editable)
     claude-project-prompt.md System prompt template
     project-plans.md         Phased plans per offering
     status-template.md       Weekly status update structure
 ```
+
+## Testing the SOW runtime
+
+```bash
+uv run --with python-docx python -m unittest discover -s tests -v
+```
+
+For release QA, also build a DOCX, render every page through the host's
+document renderer, and visually inspect the table, signature block, and
+footer/page-number field.
 
 <!-- OPENAI-SUPPORT:START -->
 ## ChatGPT and Codex

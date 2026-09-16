@@ -81,6 +81,8 @@ Check:
 - **Format spec honored** — fonts, sizes, colors, table header fill, footer pattern, and signature-block layout match the template's FORMAT SPEC. Flag deviations by role name (e.g., "Section headings render in Arial 12pt; template spec is Crimson Pro 13pt bold").
 - **Defined terms consistent** — a term defined once (e.g., "Services," "Effective Date") is capitalized and used identically everywhere after its definition.
 - **Every proposal cost line accounted for** — if the originating proposal is available, confirm every cost range/line item in it maps to a rate-table row or explicit exclusion in the SOW; flag anything dropped silently.
+- **Approved boilerplate traceable** — every boilerplate section maps to verbatim text under the template's `## Boilerplate clauses`, apart from party names and defined terms. Any missing clause, generated replacement, or `[APPROVED ... LANGUAGE REQUIRED]` marker is a must-fix and forces a no-ship verdict.
+- **Rendered-page review complete** — inspect every page image, not only extracted text. Clipping, broken tables, bad page breaks, or an unresolved footer/page field is a must-fix.
 
 ---
 

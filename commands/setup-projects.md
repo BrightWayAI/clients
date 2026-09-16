@@ -84,15 +84,23 @@ Ask for one SOW the user has already sent a client:
 
 If the user has no sample yet, skip this section — `/sow` will prompt for one on first use.
 
-**Extraction (docx only):** run `python3 scripts/sow_extract.py <path-to-sample.docx>`. This reads rPr/pPr/tblPr/tcPr and the footer part with python-docx — never eyeball rendered text for spacing, colors, or sizes. It returns:
+**Extraction (docx only):** run `uv run scripts/sow_extract.py <path-to-sample.docx>` so the script's declared `python-docx` dependency is resolved without modifying the user's Python environment. If `uv` is unavailable, use an installed document-artifact capability or run `python3 -m pip install -r scripts/requirements-sow.txt` only after the user approves the install. This reads effective run/style properties, pPr, tblPr/tcPr, section bodies, and the footer part — never eyeball rendered text for spacing, colors, or sizes. It returns:
 
 (a) **FORMAT SPEC** — page size/margins; fonts+sizes per role (title, doc title, byline, draft banner, section heading, body, table header, table body, signature captions, footer); colors; paragraph spacing; heading numbering style ("N.  Title"); bullet indent; table border/fill rules; signature-block layout; footer text pattern and page-number position.
 
-(b) **SECTION SKELETON** — ordered list of section headings found. For each, ask the user (or infer from content) a one-line note on what it covers, and classify as:
+(b) **SECTION SKELETON + SECTION TEXT** — ordered list of section headings and the paragraphs beneath each heading. For each, ask the user (or infer from content) a one-line note on what it covers, and classify as:
 - **boilerplate** (reusable verbatim, only party names/defined terms change): relationship of the parties, reps & warranties, indemnification, non-solicit, termination, general provisions
 - **engagement-specific** (rewritten per SOW): term, services, inputs, cadence, acceptance, change requests, compensation, out of scope
 
-Also capture from the sample: legal-entity name as it appears, default governing law, default payment terms (net days, late interest, suspension notice), default cure/convenience notice periods, and whether a "DRAFT FOR REVIEW — NOT EXECUTED" banner is used.
+For every section classified as **boilerplate**, preserve the extracted paragraphs verbatim in the template. The section heading alone is insufficient: `/sow` must never regenerate legal boilerplate from memory or generic model knowledge.
+
+Treat the full extraction as temporary sensitive data. Persist only the confirmed
+format spec, normalized reusable boilerplate, and defaults shown in the template
+schema below. Do not persist engagement-specific scope, rates, client names, or the
+raw sample in the plugin/config directory. Remove temporary extraction files after
+the user confirms the template.
+
+Also capture from the sample: legal-entity name as it appears, default governing law, default payment terms (net days, late interest, suspension notice), default cure/convenience notice periods, and whether a "DRAFT FOR REVIEW — NOT EXECUTED" banner is used. Replace the sample's client/vendor names in the footer pattern with `{client}` and `{vendor}` and represent the page-number field as `{page}`; confirm the normalized pattern with the user.
 
 **Confirm before saving** — show a short table (element → derived value) built from `sow_extract.py`'s markdown output, e.g.:
 
@@ -121,6 +129,14 @@ _Derived from: [sample filename], captured [date]_
 1. [Heading] — [one-line note] — [boilerplate | engagement-specific]
 2. ...
 
+## Boilerplate clauses
+
+### [Exact boilerplate section heading]
+[Verbatim paragraphs extracted from the approved sample. Preserve paragraph breaks.]
+
+### [Next exact boilerplate section heading]
+[Verbatim paragraphs...]
+
 ## Defaults from sample
 - Legal entity name (as shown): ...
 - Governing law: ...
@@ -132,6 +148,7 @@ _Derived from: [sample filename], captured [date]_
 **Re-runnable:**
 - Running this section again with a new sample **replaces** the template (confirm before overwriting — show a diff-style summary of what changed).
 - `/setup-projects --add-sample` merges a second sample into the existing template: run `sow_extract.py` on it, and for any FORMAT SPEC or skeleton field that conflicts with the existing template, ask the user which to prefer. Non-conflicting fields (e.g., a section present in the new sample but not the old one) are added.
+- A pre-0.7.1 `clients.sow-template.md` that lacks `## Boilerplate clauses` is incomplete. Offer to re-extract its named source sample; do not call the template production-ready until every boilerplate section in the skeleton has approved text.
 
 ---
 

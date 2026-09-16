@@ -52,7 +52,16 @@ redirected to another store.
 
 ## Plugin-specific degradation
 
-When Drive or project-creation APIs are absent, return a folder blueprint and host-neutral workspace prompt. Use available evidence for status and QA, list skipped sources, and keep outbound updates as drafts.
+When Drive or project-creation APIs are absent, return a folder blueprint and host-neutral workspace prompt. Use available evidence for status and QA, list skipped sources, and keep outbound updates as drafts. For SOW generation, use the host's document capability when available; otherwise use the bundled PEP 723 Python scripts through `uv run`. Never claim visual review when no renderer is available.
+
+### Generated documents on OpenAI hosts
+
+Treat a canonical `AskUserQuestion` step as one grouped question using the host's
+available elicitation UI or a single chat message. Treat `SendUserFile` as the host's
+generated-file attachment when available; in Codex CLI, save the file inside the
+workspace and report its absolute path plus the checks performed. For `.docx` visual
+QA, use the installed document-artifact renderer when available. A raw XML/text check
+does not replace rendered-page inspection.
 
 Always report unavailable or skipped capabilities in the result. A degraded run must
 remain useful where possible, but it must never imply that missing data was read or an

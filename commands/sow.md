@@ -19,10 +19,13 @@ Read `<config-root>/plugins/clients.sow-template.md`.
 - **Missing** → run the Section 6 flow from `commands/setup-projects.md`
   (capture a sample SOW) before continuing. If the user doesn't have a
   sample handy, confirm they want to proceed with
-  `references/sow-format-default.md` (generic styling) and say so plainly in
-  the final delivery message.
-- **Present** → extract the FORMAT SPEC (JSON block) and SECTION SKELETON for
-  use in Steps 5–6.
+  `references/sow-format-default.md` (generic styling). Generic styling does
+  not include legal boilerplate: obtain approved boilerplate from a prior
+  agreement or leave clearly labeled placeholders rather than inventing it.
+- **Present** → extract the FORMAT SPEC (JSON block), SECTION SKELETON, and
+  BOILERPLATE CLAUSES for use in Steps 5–6. If the template predates v0.7.1
+  and lacks `## Boilerplate clauses`, run the one-time enrichment flow in
+  `commands/setup-projects.md` before calling the result a finished SOW.
 
 ---
 
@@ -46,9 +49,10 @@ this client. If `--client <slug>` was passed, go straight to
 `<config-root>/memory/client/<slug>.md` for context; otherwise resolve the
 client from the proposal content first.
 
-- **Found** → treat the new SOW as an **addendum**: inherit defined terms,
-  rates, and governing law from the prior document rather than re-deriving
-  them. If `--amendment` was passed, structure the whole output as an
+- **Found** → use it as a consistency source for defined terms, rates, and
+  governing law. Do not automatically turn an ordinary new SOW into an
+  addendum merely because a prior agreement exists. If `--amendment` was
+  passed, structure the whole output as an
   amendment (references the base SOW/MSA by name/date, states only what
   changes) instead of a full SOW.
 - **Not found** → this is a first SOW for the client; proceed normally.
@@ -85,9 +89,12 @@ Using the SECTION SKELETON loaded in Step 1:
   preserve the proposal's specific deliverable names and phase structure.
 - **Boilerplate sections** (relationship of the parties, reps & warranties,
   indemnification, non-solicit, termination, general provisions) — copy
-  verbatim from the sample, adapting only party names and defined terms.
+  verbatim from the matching entries under the template's `## Boilerplate
+  clauses`, adapting only party names and defined terms.
   Do not rewrite boilerplate language — it's there because someone already
-  vetted it.
+  vetted it. If a required clause is missing, insert an unmistakable
+  `[APPROVED <SECTION> LANGUAGE REQUIRED]` placeholder and report the document
+  as incomplete; never synthesize legal boilerplate silently.
 
 **Pricing conversion:** turn any proposal cost range (e.g., "$74k–$107k")
 into a rate table where the top of each phase's range becomes a
@@ -105,15 +112,25 @@ addendum) rather than re-asking for them.
 
 ## Step 6 — Render, review, deliver
 
-1. Build the .docx with `scripts/sow_build.py`, passing the resolved
-   `clients.sow-template.md` path as the spec source.
-2. Convert to PDF: `soffice --headless --convert-to pdf <file>.docx`.
-3. View page 1, a table-bearing page, and the signature page. Fix anything
-   that renders off (misaligned columns, wrong header fill, missing footer
-   page field) before delivering — don't ship an unreviewed render.
-4. Deliver the **.docx** to the user via `SendUserFile` (attach). **Do not**
-   push the .docx through the Drive MCP connector — it rejects payloads over
-   ~15 KB, which most SOWs exceed; hand the file to the user directly.
+1. Write the completed document content to a temporary JSON file using the
+   structured schema in `references/sow-content-schema.md`. Keep all blocks
+   in source order and validate every proposal cost line before rendering.
+2. Run the dependency preflight:
+   `uv run scripts/sow_build.py <template-path> --check`. Then build with
+   `uv run scripts/sow_build.py <template-path> <output.docx> --content <content.json>`.
+   The scripts declare `python-docx` via PEP 723, so this does not modify the
+   user's Python environment. If `uv` is unavailable, follow the document
+   fallback in `references/openai-portability.md`.
+3. Render every page using the host's document-artifact renderer. On hosts
+   without one, use `soffice --headless --convert-to pdf <file>.docx` plus a
+   PDF-to-image renderer. View every rendered page at normal zoom, including
+   all tables and the signature page. Fix clipping, bad page breaks,
+   misaligned columns, wrong fills, or footer/page-field errors, then render
+   again. Do not call a document reviewed based only on text or XML checks.
+4. Deliver the **.docx** through the host's generated-file mechanism. In
+   Codex CLI, save it inside the workspace and report the absolute output path
+   and checks performed. **Do not** push the .docx through the Drive MCP
+   connector; hand the file to the user directly.
 5. If a Drive folder for this client exists under the clients Drive layout
    (`references/templates/drive-structure.md`), offer to tell the user where
    to place it: `00_Contract & SOW`. Don't attempt the upload yourself.
@@ -127,6 +144,9 @@ caps chosen, governing law applied, cost allocations resolved without an
 explicit answer. Be specific enough that the user can correct any one of
 them without re-reading the whole document.
 
+Label the result as a draft requiring review by the user's legal counsel.
+Never imply that generating or formatting the SOW is legal approval.
+
 If cortex is installed, append a changelog line to the client's memory node
 via `/remember --quick`, e.g.:
 `client:<slug> LOG [today] — SOW drafted for [phase/engagement]. Caps: [...]. Governing law: [...].`
@@ -138,6 +158,8 @@ via `/remember --quick`, e.g.:
 - Never invent format — if `clients.sow-template.md` is missing and the user
   declines to run setup, use `references/sow-format-default.md` and say so
   in the delivery message, not buried in a footnote.
+- Never invent legal boilerplate. Missing approved clause text makes the
+  output an incomplete draft even if every visual check passes.
 - One round of questions, not a drip. If something genuinely can't be
   resolved without a second round (e.g., the user's first answer creates a
   new ambiguity), that's fine — but don't design the flow to ask twice by

@@ -7,5 +7,9 @@ references/user-context.md
 # Archives
 *.zip
 
+# Python build/test cache
+__pycache__/
+*.py[cod]
+
 # claude plugin eval results (Nucleus Operating Model Refactor Phase 4 step 4.2)
 evals/results/

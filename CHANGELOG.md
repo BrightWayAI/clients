@@ -4,6 +4,16 @@ All notable changes to delivery are documented here.
 
 Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match `plugin.json`.
 
+## [0.7.1] — OpenAI SOW production hardening (2026-09-16)
+
+### Fixed
+- Regenerated OpenAI metadata from the canonical Nucleus adapter source and kept the default-prompt surface within the three-prompt host limit.
+- Declared `python-docx` with PEP 723 plus a requirements fallback, added a dependency preflight, and documented host-native document rendering/file delivery for ChatGPT and Codex.
+- Added a structured JSON-to-DOCX build path, full footer placeholder substitution, packaged-default path resolution, paragraph spacing/alignment, table rules, repeated headers, and signature-layout handling.
+- SOW template extraction now resolves inherited Word styles and captures section bodies so approved boilerplate can be retained verbatim instead of regenerated.
+- `/sow` no longer assumes every prior agreement means the new document is an addendum, never invents missing legal boilerplate, and requires rendered-page QA before delivery.
+- `/sow` is model-invocable from a specific natural-language request, with a matching eval case, so the OpenAI default prompt works when Clients is installed without Chief of Staff.
+
 ## [0.7.0] — Statement of Work generation (2026-09-16)
 
 ### Added

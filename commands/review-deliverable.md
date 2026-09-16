@@ -72,6 +72,16 @@ Order by severity (must-fix → nice-to-fix). For each: location, issue, suggest
 
 2–3 things genuinely worth keeping. Not flattery — concrete strengths the user should preserve in revisions.
 
+### E. SOW format check (only when the deliverable is a Statement of Work)
+
+Read `<config-root>/plugins/clients.sow-template.md`. If missing, skip this axis and note "No SOW template configured — run `/setup-projects` to enable format checking; format axis skipped."
+
+Check:
+- **Sections present and in order** — every heading in the template's SECTION SKELETON appears, in the same order, with nothing extra inserted mid-sequence.
+- **Format spec honored** — fonts, sizes, colors, table header fill, footer pattern, and signature-block layout match the template's FORMAT SPEC. Flag deviations by role name (e.g., "Section headings render in Arial 12pt; template spec is Crimson Pro 13pt bold").
+- **Defined terms consistent** — a term defined once (e.g., "Services," "Effective Date") is capitalized and used identically everywhere after its definition.
+- **Every proposal cost line accounted for** — if the originating proposal is available, confirm every cost range/line item in it maps to a rate-table row or explicit exclusion in the SOW; flag anything dropped silently.
+
 ---
 
 ## Step 5 — Verdict
@@ -84,6 +94,9 @@ End with a clear ship/no-ship call.
 
 ## Brand Compliance
 [Pass | Concerns | Fail] — [specific findings, with brand-guide references]
+
+## SOW Format Check (SOWs only)
+[Pass | Concerns | Fail | Skipped — no template configured] — [specific findings against clients.sow-template.md]
 
 ## Quality Issues (ranked by severity)
 1. **[Location]** — [issue] — *Fix:* [suggested fix]

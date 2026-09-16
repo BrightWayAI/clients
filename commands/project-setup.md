@@ -60,6 +60,7 @@ Work through these groups in order. Mark each complete before moving on.
 - Key deliverables per the SOW — ask the user to summarize or paste
 - Total contract value (optional — informs prioritization)
 - What problem is the client trying to solve? (in their words if possible)
+- **If no SOW exists yet but a proposal does** — offer to chain into `/sow` right after this interview finishes, to produce the SOW before generating the rest of the outputs below. If the user accepts, run `/sow` (passing `--client <slug>` for this engagement) and use its output as the source of truth for deliverables/timeline/pricing in Outputs 1–3.
 
 ### Group 3: Context
 - What's known about the client's org, culture, AI maturity (or whatever's relevant to your offering)
@@ -215,5 +216,5 @@ If cortex is NOT installed, skip this output silently (consistent with Output 4)
 ## What this command is *not* for
 
 - Updating an existing engagement. This is initialization-only. For ongoing updates, use `/recall [client]` (cortex) or edit the Claude Project directly.
-- Generating SOWs or contracts. Bring those in already-signed.
+- Generating SOWs or contracts directly — that's `/sow`, which this command can chain into (Group 2) when a proposal exists but no SOW yet. Bring signed SOWs in as-is otherwise.
 - Replacing PM tools. The project plan is a starting point, not a Gantt chart.

@@ -1,5 +1,5 @@
 ---
-description: Configure Client Success for offerings, drive layout, and companion-plugin integrations. Writes to `<config-root>/plugins/clients.user-context.md` using the shared vendor-neutral config-root resolver. Re-run anytime to add or update offerings.
+description: Configure Client Success for offerings, drive layout, companion-plugin integrations, and a derived SOW format template. Writes to `<config-root>/plugins/clients.user-context.md` and `<config-root>/plugins/clients.sow-template.md` using the shared vendor-neutral config-root resolver. Re-run anytime to add or update offerings; `--add-sample` merges a second SOW sample.
 ---
 
 # /setup-projects
@@ -75,6 +75,64 @@ are immutable defaults and are never edited at runtime.
 - Is `cortex` installed? (Y/N — drives whether memory node init runs in Output 4)
 - Is `growth` installed? (Y/N — provides pipeline-analyst for periodic engagement reviews, and useful context when engagements originate in its signal pipeline; if not installed, note "Growth Engine not installed; pipeline analysis skipped")
 
+### Section 6 — Sample Statement of Work (powers `/sow`)
+
+Ask for one SOW the user has already sent a client:
+- **.docx** (preferred — styling is machine-readable)
+- **Google Drive link** — export as .docx via the Drive connector, then process as above
+- **PDF** — content only; formatting falls back to `references/sow-format-default.md`. Tell the user this explicitly: "PDFs don't carry machine-readable styling, so I'll use generic default formatting until you can supply a .docx sample."
+
+If the user has no sample yet, skip this section — `/sow` will prompt for one on first use.
+
+**Extraction (docx only):** run `python3 scripts/sow_extract.py <path-to-sample.docx>`. This reads rPr/pPr/tblPr/tcPr and the footer part with python-docx — never eyeball rendered text for spacing, colors, or sizes. It returns:
+
+(a) **FORMAT SPEC** — page size/margins; fonts+sizes per role (title, doc title, byline, draft banner, section heading, body, table header, table body, signature captions, footer); colors; paragraph spacing; heading numbering style ("N.  Title"); bullet indent; table border/fill rules; signature-block layout; footer text pattern and page-number position.
+
+(b) **SECTION SKELETON** — ordered list of section headings found. For each, ask the user (or infer from content) a one-line note on what it covers, and classify as:
+- **boilerplate** (reusable verbatim, only party names/defined terms change): relationship of the parties, reps & warranties, indemnification, non-solicit, termination, general provisions
+- **engagement-specific** (rewritten per SOW): term, services, inputs, cadence, acceptance, change requests, compensation, out of scope
+
+Also capture from the sample: legal-entity name as it appears, default governing law, default payment terms (net days, late interest, suspension notice), default cure/convenience notice periods, and whether a "DRAFT FOR REVIEW — NOT EXECUTED" banner is used.
+
+**Confirm before saving** — show a short table (element → derived value) built from `sow_extract.py`'s markdown output, e.g.:
+
+| Element | Value |
+|---|---|
+| Fonts | Crimson Pro (headings) / Inter (body) |
+| Title rule | Gold #D59F1E |
+| Table header | Navy #0B131C fill, white text |
+| Sections | 18, ordered |
+| Signature block | Two-column, borderless |
+
+Only write after the user confirms it looks right or corrects it.
+
+**Write to `<config-root>/plugins/clients.sow-template.md`:**
+
+```markdown
+# clients SOW template
+_Derived from: [sample filename], captured [date]_
+
+## Format spec
+```json
+[FORMAT SPEC JSON from sow_extract.py, corrected per user feedback]
+```
+
+## Section skeleton
+1. [Heading] — [one-line note] — [boilerplate | engagement-specific]
+2. ...
+
+## Defaults from sample
+- Legal entity name (as shown): ...
+- Governing law: ...
+- Payment terms: net [N] days, late interest [rate], suspension notice [days]
+- Cure / convenience notice periods: ...
+- Draft banner used: yes/no
+```
+
+**Re-runnable:**
+- Running this section again with a new sample **replaces** the template (confirm before overwriting — show a diff-style summary of what changed).
+- `/setup-projects --add-sample` merges a second sample into the existing template: run `sow_extract.py` on it, and for any FORMAT SPEC or skeleton field that conflicts with the existing template, ask the user which to prefer. Non-conflicting fields (e.g., a section present in the new sample but not the old one) are added.
+
 ---
 
 ## Step 3 — Write the config
@@ -134,6 +192,12 @@ The immutable starter templates ship with three example offerings (AI Operating 
 
 Summarize. Offer:
 > "Try `/project-setup` for your next client engagement."
+
+If a sample SOW was captured in Section 6:
+> "Try `/sow` next time you have a proposal ready to turn into a Statement of Work — it'll match the format of the sample you just gave me."
+
+If no sample was captured:
+> "`/sow` is ready to use, but with generic default formatting until you give me a sample SOW — run `/setup-projects --add-sample` anytime to fix that."
 
 ---
 

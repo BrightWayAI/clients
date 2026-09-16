@@ -1,7 +1,7 @@
 {
   "name": "clients",
-  "version": "0.6.1",
-  "description": "Create an engagement plan, portable AI workspace prompt, folder blueprint, and next action; draft weekly client-status updates; and run structured deliverable QA.",
+  "version": "0.7.0",
+  "description": "Create an engagement plan, portable AI workspace prompt, folder blueprint, and next action; draft weekly client-status updates; run structured deliverable QA; and generate Statements of Work in your own house format.",
   "author": {
     "name": "BrightWay AI",
     "url": "https://brightwayai.com"
@@ -30,7 +30,8 @@
     "defaultPrompt": [
       "Set up a new client project.",
       "Draft this week's client status updates.",
-      "Review this deliverable before I send it."
+      "Review this deliverable before I send it.",
+      "Turn this proposal into a Statement of Work."
     ]
   }
 }

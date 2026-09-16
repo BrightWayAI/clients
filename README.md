@@ -19,7 +19,14 @@ ops's `/review-deliverable`.
 - **`/review-deliverable`** — a structured QA pass on a client deliverable
   (deck, doc, spreadsheet, one-pager) against your brand guide and the
   original brief. Returns location-tagged findings ranked by severity, plus a
-  ship/no-ship verdict.
+  ship/no-ship verdict. For SOWs, also checks against your derived SOW format
+  template.
+- **`/sow`** — turns a proposal into a finished Statement of Work in your
+  house format. No format is hardcoded — `/setup-projects` derives it from a
+  sample SOW you've already sent a client (fonts, colors, table styling,
+  section order, boilerplate vs. engagement-specific clauses). Supports
+  `--client`, `--phase`, and `--amendment` (for addenda to an existing
+  SOW/MSA).
 
 ## Install
 
@@ -39,14 +46,20 @@ Run `/setup-projects`. Captures:
 - **Drive layout** — where Active Clients lives, naming conventions, folder structure preferences
 - **Memory** — whether cortex is installed (drives whether memory init runs)
 - **Communication defaults** — your default cadence for client comms
+- **Sample SOW** — a .docx (preferred), Drive link, or PDF of an SOW you've
+  already sent a client, used to derive `/sow`'s house format. Skippable;
+  `/sow` falls back to generic default styling until you provide one. Run
+  `/setup-projects --add-sample` later to merge in a second sample, or
+  re-run the section to replace it.
 
 Run `/setup-status` to configure `/client-status`.
 
 `/review-deliverable` reads brand/CRM config from `ops.user-context.md`
 cross-plugin (same pattern `growth` uses) — no separate setup step.
 
-Saved to `<config-root>/plugins/clients.user-context.md` and
-`<config-root>/plugins/clients-status.user-context.md`.
+Saved to `<config-root>/plugins/clients.user-context.md`,
+`<config-root>/plugins/clients-status.user-context.md`, and (if a sample SOW
+was captured) `<config-root>/plugins/clients.sow-template.md`.
 
 ## Customizing templates
 
@@ -74,19 +87,25 @@ Works without them.
 .claude-plugin/plugin.json
 commands/
   project-setup.md           New-engagement interview + generation workflow
-  setup-projects.md          Plugin configuration interview
+  setup-projects.md          Plugin configuration interview (+ SOW sample capture)
   client-status.md           Weekly client status draft
   setup-status.md            Client-status configuration interview
   review-deliverable.md      Deliverable QA pass
+  sow.md                     Proposal → Statement of Work in your house format
 skills/
   project-setup/SKILL.md     Auto-fires on new-engagement phrases
   setup-projects/SKILL.md    Auto-fires on setup phrases
   client-status/SKILL.md     Auto-fires on status-update phrases
   setup-status/SKILL.md      Auto-fires on client-status setup phrases
   review-deliverable/SKILL.md Auto-fires on QA/review phrases
+  sow/SKILL.md                Auto-fires on "draft an SOW" phrases
+scripts/
+  sow_extract.py              docx → FORMAT SPEC + SECTION SKELETON (python-docx)
+  sow_build.py                Renders a .docx from the derived format spec
 references/
   user-context.template.md              Project-setup config structure (committed)
   client-status-user-context.template.md Client-status config structure (committed)
+  sow-format-default.md                 Generic SOW styling, used only absent a sample
   templates/
     drive-structure.md       Folder layouts (committed; user-editable)
     claude-project-prompt.md System prompt template

@@ -4,6 +4,18 @@ All notable changes to delivery are documented here.
 
 Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match `plugin.json`.
 
+## [0.7.0] — Statement of Work generation (2026-09-16)
+
+### Added
+- **`/sow`** — turns a proposal into a finished Statement of Work in your house format. No format is hardcoded in the plugin; everything visual is derived from a sample SOW you provide.
+- **`/setup-projects` Section 6** — captures a sample SOW (.docx preferred, Drive link, or PDF-content-only fallback), extracts a FORMAT SPEC (fonts/sizes/colors/spacing/table+signature layout, read from docx XML via python-docx — never eyeballed) and a SECTION SKELETON (ordered headings, boilerplate vs. engagement-specific), and writes both to `<config-root>/plugins/clients.sow-template.md`. Re-runnable; `--add-sample` merges a second sample and asks which to prefer on conflicts.
+- `scripts/sow_extract.py` — docx → FORMAT SPEC/SECTION SKELETON JSON + markdown confirmation table.
+- `scripts/sow_build.py` — python-docx builder (`title_block`, `heading`, `para`, `bullets`, `table`, `signature`, `exhibit`, `save`) that renders from the derived spec, with explicit fixed-width table columns, a footer PAGE field, and explicit run formatting so Google Docs import preserves fonts.
+- `references/sow-format-default.md` — generic fallback styling used only when no sample has been captured.
+- `/review-deliverable` now checks SOWs against `clients.sow-template.md` (sections present/ordered, format spec honored, defined terms consistent, every proposal cost line accounted for).
+- `/project-setup` offers to chain into `/sow` when a proposal exists but no SOW has been drafted yet.
+- `/status` and `/diagnose` (ops) report whether a SOW template is configured.
+
 ## [0.6.1] — OpenAI host adapter (2026-09-14)
 
 ### Added

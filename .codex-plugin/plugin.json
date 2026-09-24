@@ -1,7 +1,7 @@
 {
   "name": "clients",
   "version": "0.8.0",
-  "description": "Create engagement plans and portable workspace prompts, draft weekly client-status updates, run structured deliverable QA, and turn approved proposals into reviewed Statements of Work.",
+  "description": "Set up engagements from executed contracts with separate finance and project access zones, maintain the Cortex project record, draft client-status updates, review deliverables, and generate Statements of Work.",
   "author": {
     "name": "BrightWay AI",
     "url": "https://brightwayai.com"
@@ -18,7 +18,7 @@
   "interface": {
     "displayName": "Client Success",
     "shortDescription": "Start, support, document, and QA client engagements",
-    "longDescription": "Create engagement plans and portable workspace prompts, draft weekly client-status updates, run structured deliverable QA, and turn approved proposals into reviewed Statements of Work.",
+    "longDescription": "Set up engagements from executed contracts with separate finance and project access zones, maintain the Cortex project record, draft client-status updates, review deliverables, and generate Statements of Work.",
     "developerName": "BrightWay AI",
     "category": "Productivity",
     "capabilities": [

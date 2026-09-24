@@ -52,7 +52,29 @@ redirected to another store.
 
 ## Plugin-specific degradation
 
-When Drive or project-creation APIs are absent, return a folder blueprint and host-neutral workspace prompt. Use available evidence for status and QA, list skipped sources, and keep outbound updates as drafts. For SOW generation, use the host's document capability when available; otherwise use the bundled PEP 723 Python scripts through `uv run`. Never claim visual review when no renderer is available.
+When storage writes are unavailable, return a zone-separated filing plan and Scope Brief for manual execution, and report those actions as pending. Missing finance access produces a finance handoff while authorized project-zone steps continue. Cortex's client node is the portable project record; do not generate a host-specific project or workspace prompt. Use available evidence for status and QA, list skipped sources, and keep outbound updates as drafts. For SOW generation, use the host's document capability when available; otherwise use the bundled PEP 723 Python scripts through `uv run`. Never claim visual review when no renderer is available.
+
+### Contract-driven project setup on OpenAI hosts
+
+Follow `commands/project-setup.md` for executed-contract verification, required
+Access zones and Naming conventions, prep mode, and `--dry-run`. A missing
+connector never relaxes those requirements or the pricing-leak check. Keep
+finance-only terms out of shared documents, calendar descriptions, and memory.
+Do not substitute a QuickBooks write for the draft-only finance notification.
+
+The canonical Step 5 plan is the approval boundary: preview exact mutations and
+targets together, then execute approved rows without asking again for each row.
+Ask again only for a changed action or target, or a permission the host requires.
+Prep mode and `--dry-run` perform no Step 6 writes, including memory or connector
+draft creation. Permission audits are report-only; if permission enumeration is
+unavailable, report the audit as unverified. Never infer safe access from a move
+or copy, and never delete originals when a cross-drive move is unsupported.
+
+For client/person memory initialization, use the installed Cortex workflow and
+its shared `cortex_cli.py` mutation path with the current schema and locking.
+If that capability or filesystem access is unavailable, return the proposed
+project-safe node content and mark memory initialization pending. Do not bypass
+Cortex with a direct file write or recreate the removed Claude Project prompt.
 
 ### Generated documents on OpenAI hosts
 

@@ -131,9 +131,12 @@ addendum) rather than re-asking for them.
    Codex CLI, save it inside the workspace and report the absolute output path
    and checks performed. **Do not** push the .docx through the Drive MCP
    connector; hand the file to the user directly.
-5. If a Drive folder for this client exists under the clients Drive layout
-   (`references/templates/drive-structure.md`), offer to tell the user where
-   to place it: `00_Contract & SOW`. Don't attempt the upload yourself.
+5. A finished SOW is finance-zone content, not project-zone content — see
+   `## Access zones` in user-context. Offer to tell the user where to file it
+   (the finance zone's engagement folder, per the configured executed-contract or
+   superseded-draft naming pattern depending on whether this copy is executed).
+   Don't attempt the upload yourself, and never suggest filing it under the
+   project-zone `drive-structure.md` layout.
 
 ---
 

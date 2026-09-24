@@ -4,6 +4,12 @@ _Edit this file to match your firm's offerings. The starter ships with three exa
 
 Use the appropriate template for the active offering. Adjust week numbers based on the actual engagement timeline. If multiple offerings are active, combine phases into a single integrated plan.
 
+This plan is project-zone content. Name deliverable phases after the SOW's actual
+phase names at runtime (e.g., "Phase 1A — Marketplace Inventory"), not the generic
+phase names below — these are starter defaults only. Never add cost, rate, or cap
+figures to a populated plan; run the pricing-leak check before presenting it (see
+`commands/project-setup.md` Step 6.3).
+
 ---
 
 ## AI Operating Model & Governance

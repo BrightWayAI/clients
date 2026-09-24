@@ -1,7 +1,6 @@
 ---
-disable-model-invocation: true
 name: project-setup
-description: Initialize a new client engagement end-to-end. Auto-fires on "/project-setup", "set up a new project", "new client just signed", "onboard [client name]", "get [client] set up", "new engagement", "contract signed", "initialize [client] project", or any variation where the user is starting work with a new client. Also fires on client name + words like "kickoff", "starting", or "beginning". Produces Drive folder structure, Claude Project system prompt, phased project plan with immediate next step, and a memory node (if cortex is installed).
+description: Initialize a new client engagement end-to-end. Auto-fires only on explicit signals that a contract was signed or an engagement is starting — "new client just signed", "contract signed [for client]", "SOW is executed", "we just closed [client]", "onboard [client name] — they signed", "kickoff for [client], contract's in". Does not fire on ambiguous phrasing ("set up a new project", "new engagement", bare "kickoff"/"starting"/"beginning") — ask for confirmation or route to `/project-setup` explicitly instead. Produces Drive folder structure and, in the cortex client node (the public project record — not a Claude Project), the phased project plan with immediate next step and a memory node (if cortex is installed). Nothing writes before the single plan confirmation in Step 5.
 ---
 
 <!-- OPENAI-ADAPTER:START -->
@@ -19,8 +18,8 @@ See `commands/project-setup.md` for the full workflow.
 ## When this skill fires
 
 - User runs `/project-setup` directly
-- User says: "set up a new project", "new client just signed", "onboard [client]", "[client] kickoff", "starting work with [client]", "new engagement", "contract signed for [client]"
-- User mentions a new client name with starting/kickoff/beginning words
+- User states an explicit signed/starting signal: "new client just signed", "contract signed for [client]", "SOW is executed", "we just closed [client]", "[client]'s contract came back signed"
+- Ambiguous phrasing alone ("set up a new project", "new engagement", bare "[client] kickoff" with no signature signal) does not auto-fire — confirm intent or point the user at `/project-setup` instead of guessing whether a contract exists
 
 ## Pre-flight check
 

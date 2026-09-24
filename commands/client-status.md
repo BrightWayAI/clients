@@ -89,6 +89,15 @@ Default sections (template-defined, user-editable):
 - Blockers, asks, decisions pending — explicit and specific
 - If nothing: "All clear on our side this week."
 
+**Budget / spend line (optional, per-client override)** — if the SOW requires spend
+and forecast reporting against a cap, the client-facing draft may include a budget
+line, since the client already knows the terms. This is the only client-status
+surface where a figure is allowed. Any other draft or working copy that contains
+budget/spend figures (an internal version, a redo, a discarded draft) is stored in
+the finance zone or kept out of Drive entirely — never in the project zone. Run the
+pricing-leak check before writing any draft to Drive; a finding in a non-client-facing
+draft stops the write and is reported to the user, not silently dropped.
+
 **[Optional] 📚 A relevant share**
 - Per user-context, optionally include a relevant article / framework / insight
 - One-liner with "thought you'd find this interesting because [specific reason]"

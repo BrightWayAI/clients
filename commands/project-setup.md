@@ -1,220 +1,342 @@
 ---
-description: Initialize a new client engagement end-to-end. Interviews you about the engagement, then produces Drive folder structure, Claude Project system prompt, phased project plan with immediate next step, and (if cortex is installed) a memory node so future sessions have context from day one.
+description: Initialize a new client engagement end-to-end, starting from the executed contract. Verifies the SOW is signed, extracts terms into project-safe and finance-only fields, asks only about what the contract doesn't answer, then executes one confirmed plan — Drive filing, folder structure, cortex memory node (the public project record), and companion-plugin/connector handoffs — respecting access-zone boundaries throughout.
 ---
 
 # /project-setup
 
-End-to-end client engagement initialization. A new client signs → run this command → 5 minutes later you have everything you need to start delivering.
+End-to-end client engagement initialization, driven by the executed contract. A
+contract comes back signed → run this command → one confirmation → Drive is filed
+and organized, the cortex client node (the phased plan, immediate next step, and
+engagement context) is written, and companion plugins/connected apps are updated.
+
+This command does not create or maintain a Claude Project. Cortex's client node is
+the canonical, portable project record — it works the same whether the session is
+Claude Code, Claude.ai, ChatGPT, or Codex.
+
+Supports `--dry-run` (produce the plan in Step 5, show it, stop — nothing executes).
 
 ---
 
 ## Step 0 — Preflight
 
-Read `<config-root>/plugins/clients.user-context.md`. If missing, route to `/setup-projects` and stop.
+Read `<config-root>/plugins/clients.user-context.md`.
 
-Extract:
-- Identity (your name, company, what you do)
-- Offerings catalog (your service offerings, with names and durations)
-- Drive layout (where Active Clients lives, naming conventions)
-- Companion plugins (cortex installed → run memory init; ops installed → can pull pipeline context)
-- Communication defaults (default cadence, response time)
+- **Missing entirely** → route to `/setup-projects` and stop.
+- **Missing `## Access zones` or `## Naming conventions`** → this is a pre-0.8.0
+  config. Explain: "This is a breaking change in v0.8.0 — `/project-setup` now
+  requires Access zones and Naming conventions configured, so financial data can
+  never land in a contractor-visible folder. Run `/setup-projects` to add them (your
+  existing offerings/identity/communication settings are untouched)." Stop.
+- **Present and complete** → continue.
+
+Extract from user-context: Identity, Offerings catalog, Drive layout, **Access
+zones**, **Naming conventions**, Companion plugins (cortex / ops / growth), and
+Communication defaults.
+
+**Connector check.** Determine which of file storage, email, calendar, and CRM are
+available. Report any that aren't checked as unavailable; skip their steps later
+rather than failing. This plugin never connects to accounting software — the
+finance-alert email in 6.5 is how accounting setup gets requested.
+
+**Zone-access check.** Determine the current user's access to each configured zone
+(skip zones marked "not used"). If the current user lacks finance-zone access:
+still carry out every project-zone step in full, and instead of the finance-zone
+actions in Step 6.1–6.2, produce a **finance handoff list** — the exact filing and
+permission-audit actions someone with finance access needs to do — for the finance
+owner named in Access zones' expected-access description. Never fail the whole run
+because one zone is inaccessible to this user.
 
 Read user-owned template overrides when present, otherwise the bundled defaults:
 - `<config-root>/plugins/clients/templates/drive-structure.md` → fallback `references/templates/drive-structure.md`
-- `<config-root>/plugins/clients/templates/claude-project-prompt.md` → fallback `references/templates/claude-project-prompt.md`
 - `<config-root>/plugins/clients/templates/project-plans.md` → fallback `references/templates/project-plans.md`
-
-Bundled defaults:
-- `references/templates/drive-structure.md`
-- `references/templates/claude-project-prompt.md`
-- `references/templates/project-plans.md`
 
 Installed plugin files are read-only. User-owned overrides are the structural source
 of truth when present; otherwise use bundled defaults.
 
 ---
 
-## Outputs you will produce
+## Step 1 — Find and verify the contract
 
-1. **Google Drive folder structure** (you tell the user to create manually)
-2. **Claude Project system prompt** (copy-paste ready)
-3. **Phased project plan + single immediate next step** (offer to execute it)
-4. **Memory node initialization** (only if cortex is installed)
+Accept, in order of preference: an attached file, a Drive link, or a search of Drive
+and email for the client name plus "SOW", "agreement", or "signed".
 
----
+**Tell executed copies apart from drafts.** Signals that a copy is executed:
+- a completed e-signature PDF, such as a Google Workspace eSignature copy named
+  `<doc> - M/D/YY, h:mm AM`
+- a DocuSign or Dropbox Sign completion email and certificate
+- a signature block with names and dates actually filled in
+- the absence of markers like "DRAFT" or "NOT EXECUTED"
 
-## Phase 1 — Interview
+A title containing "DRAFT FOR REVIEW" or "NOT EXECUTED" is a draft regardless of any
+other signal, even if a signature-shaped block exists elsewhere in the doc.
 
-Run conversationally. Don't dump all questions at once — group them, ask follow-ups, keep it human. If the user already shared context in the conversation, pull from it rather than re-asking.
-
-Work through these groups in order. Mark each complete before moving on.
-
-### Group 1: The basics
-- Client organization name
-- Primary contact: name, title, email
-- Which of your offerings? (use offerings from user-context)
-- Engagement start date and target end (or duration)
-- Deal name in your CRM (for linking, if applicable)
-
-### Group 2: Scope & deliverables
-- Key deliverables per the SOW — ask the user to summarize or paste
-- Total contract value (optional — informs prioritization)
-- What problem is the client trying to solve? (in their words if possible)
-- **If no SOW exists yet but a proposal does** — offer to chain into `/sow` right after this interview finishes, to produce the SOW before generating the rest of the outputs below. If the user accepts, run `/sow` (passing `--client <slug>` for this engagement) and use its output as the source of truth for deliverables/timeline/pricing in Outputs 1–3.
-
-### Group 3: Context
-- What's known about the client's org, culture, AI maturity (or whatever's relevant to your offering)
-- Known risks, sensitivities, landmines
-- Hard deadlines or external dependencies beyond engagement end
-- Any contractors or collaborators involved? Who?
-
-### Group 4: Communication
-- Client's preferred communication style and cadence
-- Tools or platforms the client uses that you'll need access to
-
-### Group 5: Offering-specific questions
-For each offering selected, ask the offering-specific questions documented in `references/templates/project-plans.md` for that offering. (User customizes which questions per offering during `/setup-projects`.)
-
-If the user picks multiple offerings, blend the offering-specific questions and produce a combined project plan.
+**No executed copy found** → switch to **prep mode**: pull the terms from the best
+available draft (Step 3), build the full plan and every downstream artifact, but
+write nothing to Drive or any connector. Report "Ready to run on signature — nothing
+was written." Continue through Steps 2–5 in prep mode so the plan is ready the moment
+the contract executes; do not run Step 6.
 
 ---
 
-## Phase 2 — Generate outputs
+## Step 2 — Classify the run
 
-After the interview, produce all outputs in a single response. Use the templates as the structure. Populate every field with real engagement data — no unfilled placeholders.
+Check memory (cortex `client:` nodes if installed), the file-storage zones, and the
+CRM for existing records of this client.
 
-### Output 1: Drive folder structure
+Classify as one of:
+- **new client** — no prior record anywhere
+- **new engagement or phase for an existing client**
+- **amendment** to an existing SOW
 
-Present the folder tree clearly. Tell the user to create this manually in their Active Clients shared drive (or wherever their `drive-active-clients-path` from user-context says).
+**A returning client never gets a second client folder.** The project-zone
+structure is one evergreen folder per client with dated engagement subfolders
+underneath (`[Client]/[YYYY-MM] [Engagement Name]/`), so a new engagement or phase
+is just a new sibling subfolder — never a reason to create a second client folder.
+If several client-level folders already exist for the same client in the same zone
+(e.g., "Barker and Scott" and "Barker & Scott"), list them and ask which is
+canonical. Once confirmed: propose renaming the canonical one to match the naming
+convention, and propose moving any content — including any existing engagement
+subfolders — from the non-canonical folder(s) into it. **Never delete** — if a move
+isn't supported by the connector, copy and list originals for manual removal.
 
-Use `references/templates/drive-structure.md` as the source. Adapt the offering-specific Folder 02 to match the active offering(s).
+---
 
-### Output 2: Claude Project system prompt
+## Step 3 — Extract the terms
 
-Generate a complete, copy-paste-ready system prompt using `references/templates/claude-project-prompt.md` as the structure. Replace every bracketed field with real data. Remove sections that are empty or not applicable — never leave placeholder text.
+Build a structured record, sorted into zones:
 
-After presenting the system prompt, include this instruction:
+**Project-safe fields** (may appear in the project zone):
+- client name and address
+- effective date
+- phases with durations and deliverables
+- total duration as a range, and the resulting calendar end-date range
+- client roles and responsibilities
+- meeting cadence and tracker commitments
+- out-of-scope items
+- the defect or warranty window
 
-> **To set up the Claude Project:** claude.ai → Projects → New Project → name it "[Client Name] — [Offering Short Name]" → paste this as the project instructions → upload the SOW and any relevant client documents as project files.
+**Finance-only fields** (finance zone / finance config only):
+- billing model (fixed / T&M / retainer)
+- rates
+- per-phase cost estimates
+- cap or not-to-exceed amount
+- invoicing cadence and itemization requirements (e.g. "itemized by phase")
+- payment terms and suspension terms
+- expense policy
+- maintenance estimates
 
-### Output 3: Project plan + immediate next step
+**Flag contradictions** against memory or the CRM — e.g., memory says "negotiating
+at $80K" but the contract has a cap of $107,000. Report the mismatch; don't silently
+prefer one source.
 
-Generate a phased delivery plan tailored to the active offering, using `references/templates/project-plans.md` as the source. Adjust week numbers based on the actual engagement timeline.
+---
 
-**Format for each phase:**
-- Phase name and goal (one sentence)
-- Key tasks (3–6 bullets)
-- Estimated timeline (weeks, based on what the user shared)
-- Primary owner (You / Client / Shared)
+## Step 4 — Gap interview
 
-**After the project plan, surface a single Immediate Next Step:**
-- The one thing to do in the next 24 hours
-- Make it specific: name the person, the action, the channel
-- Example: "Send the kickoff prep email to [Name] — want me to draft it now?"
-- Offer to execute it if it's something Claude can help with (draft email, generate agenda, etc.)
+Ask only for what the contract doesn't answer. Typically:
+- the named client product owner and executive sponsor, if the contract gives only roles
+- the kickoff date
+- which CRM deal to update, and which amount to record
+- subcontractors involved
+- risks and landmines
 
-### Output 4: Memory node initialization
+Keep the offering-specific questions from `references/templates/project-plans.md`
+for each selected offering, but skip any the contract already answers. Run
+conversationally — group questions, don't dump them all at once.
 
-**Only if `cortex` is installed** (per user-context).
+---
 
-Memory lives at `<config-root>/memory/`. Create the node file at `<config-root>/memory/client/[client-name-lowercase].md` using this structure:
+## Step 5 — One plan, one confirmation
 
-```markdown
-# client:[client-name-lowercase]
-> Last updated: [today]
+Present every action as a table: **system | action | target zone | reversible?**
+Cover every action in Step 6 that applies to this run (prep-mode runs show the same
+table but note nothing executes). The user can approve everything or strike
+individual rows.
 
-## Summary
-client:[client-name-lowercase] SUMMARY (updated [today]): [Client Name] engagement — [offering]. [1-sentence scope from SOW]. Primary contact: [name, title]. Kickoff: [date]. Status: Initializing.
+`--dry-run` stops here — produce this table and the artifacts it describes, then
+stop. Nothing in Step 6 runs.
 
-## Knowledge
-### Models
-### Gotchas
-### Lessons
-### Recipes
-### Insights
-### Corrections
+---
 
-## People
-client:[client-name-lowercase] PEOPLE: [Primary contact name] ([title]) — Primary client contact. [email if known].
+## Step 6 — Execute (approved rows only, in this order)
 
-## Changelog
-client:[client-name-lowercase] LOG [today] — Project initialized: Offering: [offering]. Contract value: [if shared]. Key deliverables: [2-3 items]. Phase 1 focus: [phase 1 goal]. Immediate next step: [the step from Output 3].
+### 6.1 — Finance zone
 
-## Open Threads
-- [FRESH] Complete Phase 1 kickoff activities
+- File the executed contract under `[Client]/[YYYY-MM] [Engagement Name]/` using
+  the configured executed-contract file pattern.
+- Move every draft, redline, and superseded copy found in **any** zone — including
+  ones sitting in the project zone — into `[YYYY-MM] [Engagement Name]/_Archive/`.
+- Moving into the finance drive applies the finance drive's permissions
+  automatically. If the connector can't move a file between shared drives, copy it
+  and list the originals for manual removal. **Never delete.**
+- If the current user lacks finance-zone access (Step 0), skip this and add the
+  equivalent actions to the finance handoff list instead.
 
-## Next Actions
-- [P0] [Immediate next step from Output 3]
+### 6.2 — Permission audit (report-only)
 
-## Signals
-```
+- After filing, read the permissions on every file in the finance zone the skill
+  touched.
+- Flag: any access granted directly on a file that differs from what the drive
+  grants by default; any "anyone with the link" sharing found on a finance-zone
+  file; anyone with project-zone access who isn't on the expected-access
+  description in config.
+- **Report only.** Never change a permission — that requires the user to act
+  separately, with their own confirmation, outside this command.
 
-Also update `<config-root>/memory/DASHBOARD.md` — add the new node to the Active Nodes section.
+### 6.3 — Project zone
 
-After committing, confirm: "Memory node `client:[name]` created — future sessions will have context on this engagement from the start."
+- Create the client-level folder if it doesn't already exist, then create the
+  dated engagement subfolder `[YYYY-MM] [Engagement Name]/` with the four standard
+  subfolders from `drive-structure.md`: `00_Scope`, `03_Deliverables`,
+  `04_Client Assets`, `05_Meeting Notes`. No other subfolders — this skeleton is
+  the same for every offering and every client.
+- Name `03_Deliverables` subfolders after the SOW's **actual** phases (e.g.,
+  "Phase 0 — Knowledge Capture & Setup", "Phase 1A — Marketplace Inventory"), not a
+  generic template phase name.
+- Write the **Scope Brief** into `00_Scope` per `drive-structure.md`'s spec
+  (project-safe fields only; one no-link line naming where the contract is held; no
+  shortcut to the contract).
+- **Before writing**, run the pricing-leak check (below) on the Scope Brief. A
+  finding stops the write and is shown to the user instead — never written with
+  the flagged content redacted silently, and never skipped.
 
-If cortex is NOT installed, skip Output 4 and note in the final response that memory init was skipped.
+There is no Claude Project prompt and no phased-plan document written to Drive.
+The phased plan, immediate next step, and ongoing engagement context live in the
+cortex client node (6.4) — that's the portable, canonical project record.
 
-### Output 5: Primary contact person page (cortex v4.2+)
+**Pricing-leak check.** Before any write to the project zone, and for any content
+bound for a shared surface (the Scope Brief, the cortex client node, calendar event
+descriptions, `/client-status` drafts): run a regex pass for currency amounts,
+per-hour/per-day rate patterns, "not to exceed", and `net \d+`, plus a semantic pass
+for restated dollar figures, rate language, or cap language that the regex might
+miss (e.g., "one hundred seven thousand dollars", "capped at approximately $107K").
+If anything is found, **stop and show exactly what was found and where** instead
+of writing it. Client-facing `/client-status` budget lines are the one documented
+exception — see `commands/client-status.md`.
 
-**Only if cortex is installed.** This is graduation trigger #3 in cortex's CLAUDE.md schema — when project-setup names a primary contact, that person should have a canonical page.
+### 6.4 — Companion plugins
 
-1. Resolve `<config-root>` via the standard pointer.
-2. Compute slug from the primary contact's name: `firstname-lastname` lowercased, hyphenated.
-3. Check for name collision: if `<config-root>/memory/person/<slug>.md` already exists about someone else (different company / email), prompt the user once to disambiguate. Recommend appending the client slug: `<slug>-<client-name-lowercased>.md`.
-4. **If the page does NOT exist** → create it using cortex's person-page schema:
+Skip any that aren't installed; report the skip in Step 7.
 
-```markdown
-# person:[firstname-lastname]
-> Last updated: [today]
+- **`admin` `/setup-time`** — pass the billing model, rate, cap, and **phase tags**
+  so `/track-time` records the phase from day one. This matters whenever the SOW
+  requires invoices itemized by phase. Phase *names* are project-safe and may be
+  passed freely; rates and caps stay in finance config, passed only to `admin`'s
+  own finance-scoped storage, never echoed back into a project-zone artifact.
+- **`clients` `/client-status`** — register the client and cadence. If the SOW
+  requires spend/forecast reporting against a cap, include that in the
+  client-facing budget line per `commands/client-status.md`'s storage rule.
+- **`cortex`** — write the client node and the primary contact's person page using
+  cortex's **current** (v4.16+) schema, not the inline Summary/Knowledge/Changelog
+  template from earlier versions of this command. This node — not a Claude
+  Project — is the client's public, portable project record. Concretely:
+  - Read `<config-root>/memory/client/[client-slug].md` if it exists, else create
+    it at that path.
+  - New node: frontmatter (`type: client`, `status`, `created`, `last_active`,
+    `decay_profile`) + `# client:[client-slug]` + `## Current state` + `## Open
+    loops` + `## Linked entities`, matching the shape in cortex's
+    `references/workstream-schema.md`. Populate `## Current state` with the
+    engagement summary — offering, primary contact, kickoff date, current phase and
+    goal, and the phased plan (project-safe fields only). Populate `## Open loops`
+    with the Phase 1 kickoff P0 and the single Immediate Next Step (see Outputs
+    below).
+  - Returning client → append the new engagement to `## Current state` / `## Open
+    loops` rather than replacing them; don't create a second node.
+  - Do **not** write a `DASHBOARD.md` — that file belongs to a pre-restructure
+    cortex layout. Run cortex's own `/reindex` (or note that it should be run) so
+    `index.md` picks up the new/updated node instead.
+  - Person page: `<config-root>/memory/person/[slug].md`, same current-schema
+    shape. If it already exists for a different person (name collision), ask once
+    to disambiguate and recommend `<slug>-<client>.md`.
+  - Finance-only fields (rate, cap, billing model) never go into a shared cortex
+    node — cortex's private/finance-scoped storage only, if cortex offers one;
+    otherwise finance config stays in this plugin's finance zone/config, not memory.
+  - If cortex's schema references (`references/workstream-schema.md`,
+    `references/node-taxonomy.md`) aren't readable at run time, fall back to
+    asking the user whether to proceed with a best-effort current-shape node or
+    skip cortex writes for this run — never guess and write the outdated
+    Summary/Knowledge/Changelog/DASHBOARD shape.
 
-## Identity
-- **Full name:** [Primary contact full name]
-- **Title / role:** [Title]
-- **Company:** [client/[client-name-lowercase]]
-- **Email:** [email if known]
-- **LinkedIn / other:** [if known]
-- **First mentioned:** [today] (project-setup for [client-name])
+### 6.5 — Connected apps
 
-## Relationship
-- **How we know each other:** Primary contact on the [offering] engagement. Kickoff [date].
-- **Relationship temperature:** Active
-- **Last meaningful contact:** [today] (kickoff prep)
-- **Relationship owner:** [you]
+Each optional; skip and report if its connector isn't available.
 
-## Recent interactions (last 90 days, append-only)
-- [today] — project-setup — primary contact for new engagement [client-name]
+- **CRM (HubSpot):** move the deal to closed-won with the amount the user chose in
+  Step 4, link the contact, set start and end dates.
+- **Calendar:** suggest kickoff times and create holds. Create the recurring
+  meeting the SOW calls for. Event descriptions carry no pricing — pricing-leak
+  check applies here too.
+- **Email — kickoff:** draft the kickoff email to the primary contact, built from
+  the SOW's client-inputs section. **Draft only — never send.**
+- **Email — finance alert:** draft an email to the recipients configured in
+  user-context's `## Notification recipients` (finance list) announcing the new
+  client or new engagement, with the contract's finance-only terms (billing model,
+  rate, cap, invoicing cadence/itemization, payment terms) and the executed
+  contract attached or linked from its finance-zone location. This is the request
+  for finance to set the client/engagement up in accounting — the plugin never
+  touches accounting software directly. **Draft only — never send.**
+- **Email — delivery-team alert:** draft an email to the recipients configured in
+  `## Notification recipients` (delivery-team list) announcing the new engagement,
+  with the project-safe scope summary (offering, phases, deliverables, timeline,
+  primary contact) and the single Immediate Next Step from Outputs. Run the
+  pricing-leak check on both drafts before presenting them — the finance draft is
+  the one place a figure is expected, but it must never reach the delivery-team
+  draft. **Draft only — never send.**
 
-## Open threads
-- [P0] Complete Phase 1 kickoff activities (linked to [client/[client-name-lowercase]])
+If `## Notification recipients` isn't configured yet, ask for the finance and
+delivery-team recipient lists once during this run, offer to save them to
+user-context so future runs don't ask again, and still produce both drafts this
+time.
 
-## Notes
-[Any context from the interview that's specific to this person, not the client/company]
+---
 
-## Linked entities
-- Projects: [client/[client-name-lowercase]]
-```
+## Step 7 — Report
 
-5. **If the page DOES exist** (returning client, or same person appeared in a prior engagement) → append a Recent interaction line: `[today] — project-setup — primary contact for new engagement [client-name]`. Append `[client/[client-name-lowercase]]` to Linked entities if not already present. Refresh Relationship temperature to Active.
+- A checklist of everything created, moved, or renamed, with links.
+- Anything skipped, and why (missing connector, missing cortex, prep mode).
+- The finance handoff list, if any (Step 0/6.1).
+- The permission-audit findings (Step 6.2) — report only, no changes made.
+- The next step.
 
-6. Add or refresh the "Active people" row in `<config-root>/memory/DASHBOARD.md`.
+---
 
-If cortex is NOT installed, skip this output silently (consistent with Output 4).
+## Outputs (produced across Steps 3–6, in prep mode too — minus the writes)
+
+1. **Drive folder structure** — created directly in the project zone (not described
+   for manual creation): the client folder, the dated engagement subfolder, and the
+   four standard subfolders.
+2. **Scope Brief** — written into `00_Scope`.
+3. **Phased project plan + single immediate next step** — written into the cortex
+   client node's `## Current state` / `## Open loops` (6.4), the client's public
+   project record. Surface one Immediate Next Step in the response either way: the
+   one thing to do in the next 24 hours, specific about person/action/channel
+   (e.g., "Send the kickoff prep email to [Name] — want me to draft it now?").
+   Offer to execute it if it's something Claude can help with. **If cortex isn't
+   installed**, present the phased plan and next step in the response only — it
+   isn't written anywhere — and note in Step 7 that memory init was skipped.
+4. **Memory node + person page** — only if cortex is installed (6.4).
 
 ---
 
 ## Tone & behavior notes
 
-- Pull from context already shared — don't re-ask what you already know.
+- Pull from context already shared — don't re-ask what the contract or the
+  conversation already answered.
 - If something critical is missing, flag it as a gap rather than blocking progress.
-- Use the client's real name, real deliverable names from the SOW, real contacts throughout.
-- The system prompt and project plan should feel purpose-built for this client, not templated.
-- If multiple offerings selected, blend offering-specific questions and produce a combined project plan.
+- Use the client's real name, real deliverable names from the SOW, real contacts
+  throughout.
+- The project plan should feel purpose-built for this client, not templated.
+- If multiple offerings are selected, blend offering-specific questions and produce
+  a combined project plan.
 
 ---
 
 ## What this command is *not* for
 
-- Updating an existing engagement. This is initialization-only. For ongoing updates, use `/recall [client]` (cortex) or edit the Claude Project directly.
-- Generating SOWs or contracts directly — that's `/sow`, which this command can chain into (Group 2) when a proposal exists but no SOW yet. Bring signed SOWs in as-is otherwise.
+- Updating an existing engagement after initialization. For ongoing updates, use
+  `/recall [client]` (cortex).
+- Generating SOWs or contracts — that's `/sow`. Bring signed SOWs in as-is; in prep
+  mode this command works from the best available draft and writes nothing.
 - Replacing PM tools. The project plan is a starting point, not a Gantt chart.
+- Changing any permission it flags in Step 6.2 — that's always a separate, manual,
+  user-confirmed action.

@@ -4,6 +4,95 @@ All notable changes to delivery are documented here.
 
 Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match `plugin.json`.
 
+## [0.8.0] — Executed-contract intake, access zones, real setup actions (2026-09-24)
+
+### Breaking
+- **`## Access zones` and `## Naming conventions` are now required** in
+  `clients.user-context.md`. `/project-setup` refuses to run without them.
+  **Upgrade:** re-run `/setup-projects` — it detects a pre-0.8.0 config and runs
+  only the two new sections, leaving your existing offerings/identity/communication
+  settings untouched.
+
+### Added
+- **No accounting connector.** `/project-setup` no longer touches QuickBooks (or
+  any accounting software) directly. Instead it drafts a **finance-alert email**
+  (recipients from the new `## Notification recipients` config, never hardcoded)
+  with the new client/engagement's finance-only terms and the executed contract,
+  so finance sets it up in accounting themselves — and a **delivery-team-alert
+  email** with the project-safe scope summary and the immediate next step. Both
+  draft-only, both pricing-leak-checked (the finance draft is the one place a
+  figure belongs; it must never leak into the delivery-team draft).
+- Renamed the drafts-and-redlines archive folder from `_Superseded` to `_Archive`
+  — same behavior, clearer name.
+- `/project-setup` now starts from the executed contract instead of interviewing
+  for facts the signed SOW already answers. It finds and verifies the contract
+  (executed vs. draft signal detection), classifies the run (new client / new
+  engagement or phase / amendment), extracts terms into project-safe vs.
+  finance-only fields, flags contradictions against memory/CRM, and asks the gap
+  interview only for what the contract doesn't answer. No executed copy found →
+  **prep mode**: build the full plan, write nothing, report "ready to run on
+  signature."
+- **Access zones** (`finance` / `pipeline` / `project`) — every output is assigned
+  to a zone; financial data (amounts, rates, caps, phase estimates, payment terms,
+  invoice/deal amounts, margin, vendor costs) can never land in the open `project`
+  zone. A **pricing-leak check** (regex + semantic pass) runs before every write to
+  the project zone or any shared surface (Claude Project prompt, phased plan,
+  calendar descriptions, the Scope Brief, `/client-status` drafts) and stops the
+  write on a finding instead of redacting or proceeding silently.
+- `/project-setup` now does the setup instead of describing it: creates the folder
+  tree, files and renames documents, moves drafts/superseded copies into
+  `_Archive` in the finance zone, and hands off to `admin`, `client-status`,
+  `cortex`, and connected apps (HubSpot, Calendar, email-draft) — all
+  behind a single confirmable plan (`system | action | target zone | reversible?`).
+  Supports `--dry-run`.
+- **Evergreen client/engagement folder structure.** One folder per client, with
+  dated `[YYYY-MM] [Engagement Name]` subfolders underneath for each engagement —
+  a returning client or a new phase is a new sibling subfolder, never a second
+  client folder. The per-engagement skeleton is now a flat, offering-agnostic
+  four: `00_Scope`, `03_Deliverables`, `04_Client Assets`, `05_Meeting Notes`.
+  Dropped `01_Kickoff` (folds into Meeting Notes) and offering-specific Folder 02
+  variants.
+- **Claude Project generation removed.** The cortex client node is now the
+  client's public, portable project record — the phased plan and immediate next
+  step live there instead of in a generated Claude Project system prompt.
+  `references/templates/claude-project-prompt.md` is deleted; nothing replaces its
+  `Contract Value` field anywhere, since the whole output no longer exists.
+- **Permission audit** (report-only) after finance-zone filing: flags direct
+  grants that differ from the drive's defaults, "anyone with the link" sharing on
+  finance files, and unexpected project-zone access. Never changes a permission —
+  always a separate, manually-confirmed action.
+- **Naming conventions** captured once in config (client folder name, engagement
+  folder pattern, executed-contract and superseded-draft file patterns, Scope Brief
+  file name, date format) and applied to every folder/file the skill creates or
+  files. `/setup-projects` can infer these from the existing Drive and confirm
+  before saving.
+- **Safe to re-run** — recognizes a returning client and reuses its canonical
+  folder per zone instead of creating a duplicate; if duplicates already exist,
+  lists them and asks which is canonical, then proposes (never forces) a rename
+  and consolidation. Never deletes.
+- Cortex handoff now targets cortex's **current** (v4.16+) node schema
+  (frontmatter + `## Current state` + `## Open loops`, matching
+  `references/workstream-schema.md`) instead of the outdated inline
+  Summary/Knowledge/Changelog/`DASHBOARD.md` template.
+- `skills/project-setup/SKILL.md` — fixed the contradictory
+  `disable-model-invocation: true` + auto-trigger-phrase description; it now
+  auto-fires only on explicit signed/starting signals, with the one-confirmation
+  execution gate as the safety net. New eval case
+  `evals/project-setup-natural-language/`.
+
+### Changed
+- `references/templates/drive-structure.md` — `00_Contract & SOW` replaced with
+  `00_Scope`. The skill generates a Scope Brief Google Doc into it from
+  project-safe fields only; excludes compensation/IP/liability/indemnification/
+  termination-payment; carries one no-link, no-amount line naming where the
+  contract is held. No shortcut to the contract is ever created in the project
+  zone — a Drive shortcut reveals the target's file name even to people who can't
+  open it.
+- `commands/client-status.md` — client-facing budget/spend-against-cap lines may
+  still appear (the client already knows the terms); any other draft containing
+  figures is stored in the finance zone or kept out of Drive, never the project
+  zone.
+
 ## [0.7.1] — OpenAI SOW production hardening (2026-09-16)
 
 ### Fixed

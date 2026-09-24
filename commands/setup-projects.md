@@ -30,8 +30,11 @@ For the rest of this document, **`<config-root>`** refers to the resolved path. 
 
 ## Step 1 — Check for existing config
 
-Read `<config-root>/plugins/clients.user-context.md`. Populated → ask whether to
-update. If missing, check the former
+Read `<config-root>/plugins/clients.user-context.md`. Populated but missing
+`## Access zones` or `## Naming conventions` → this is a pre-0.8.0 config; explain
+that these two sections are new and required, then run Sections 2b and 2c before
+anything else, leaving the rest of the config untouched. Populated and current →
+ask whether to update. If missing, check the former
 `<config-root>/plugins/project-setup.user-context.md` path once and offer to import
 it into the canonical Client Success file without deleting the old file. <!-- LEGACY_COMPAT -->
 
@@ -48,7 +51,47 @@ it into the canonical Client Success file without deleting the old file. <!-- LE
 ### Section 2 — Drive layout
 - Where do you store active client work? (e.g., Google Drive shared drive name + path: "Active Clients")
 - Naming convention for client folders (e.g., "[Client Name] — [Offering Short Name]")
-- Any standardized subfolder structure beyond the defaults? (Defaults: 00_Contract, 01_Kickoff, 02_Discovery, 03_Deliverables, 04_Client Assets, 05_Meeting Notes, 06_Internal Working Docs)
+- Any standardized subfolder structure beyond the defaults? (Defaults: 00_Scope, 03_Deliverables, 04_Client Assets, 05_Meeting Notes — one evergreen folder per client, with `[YYYY-MM] [Engagement Name]` subfolders underneath; same four subfolders every time, no offering-specific variants)
+
+### Section 2b — Access zones (required)
+
+`/project-setup` will not run without this section. Every output it produces gets
+assigned to a zone, and financial data (dollar amounts, rates, caps, phase cost
+estimates, payment terms, invoice/deal amounts, margin, vendor costs) can never land
+in the `project` zone.
+
+For each of `finance` (restricted — contracts, SOW drafts/redlines, amendments,
+invoices, timesheets, rate cards), `pipeline` (restricted — pre-signature material),
+and `project` (open — scope, plans, deliverables, meeting notes, client assets;
+typically shared with contractors), capture:
+- the shared drive (name + ID)
+- the path pattern
+- who is expected to have access (a description, used later for permission audits)
+
+Any zone can be marked "not used" if the user doesn't separate their Drive that way.
+
+**Offer to infer:** sample the user's existing Drive (finance-looking and
+project-looking locations) and propose zone assignments and path patterns based on
+what's already there. Show the proposal as a table and get confirmation before
+saving — never save an inferred zone silently.
+
+### Section 2c — Naming conventions (required)
+
+Capture, one at a time:
+- the client folder name (one canonical, evergreen name per client — no "and" /
+  "&" / hyphen variants, and never per-engagement; if the user's Drive already has
+  variants for the same client, surface them now and ask which is canonical)
+- the engagement folder pattern (e.g., `YYYY-MM [Engagement Name]`, using the
+  engagement's effective date from the SOW as YYYY-MM)
+- the executed-contract file pattern (e.g., `YYYY-MM-DD [Client] — [Engagement] SOW (Executed).pdf`)
+- the superseded-draft pattern (e.g., `_Archive/` under the engagement folder)
+- the Scope Brief file name pattern
+- the date format
+
+**Offer to infer:** sample the finance and project zones and propose the patterns
+they already follow most often. Show the proposal and let the user confirm before
+saving. Every file or folder `/project-setup` creates or files uses these patterns
+afterward.
 
 ### Section 3 — Offerings catalog
 
@@ -70,6 +113,20 @@ are immutable defaults and are never edited at runtime.
 - Default communication cadence (e.g., "weekly async update + biweekly sync")
 - Default response time (e.g., "1 business day")
 - Tools you typically use to communicate with clients (Email / Slack / Teams / etc.)
+
+### Section 4b — Notification recipients
+
+Captures who `/project-setup` alerts when a new client or engagement is set up.
+Never hardcode these — ask once here, save, reuse on every run.
+
+- Who should get the **finance alert** (new-client/new-engagement terms + the
+  executed contract) so they can set the client/engagement up in accounting?
+- Who should get the **delivery-team alert** (scope, key details, immediate next
+  step)?
+
+If the user hasn't captured this yet when `/project-setup` needs it, it will ask
+inline and offer to save the answer here — this section isn't a hard blocker like
+Access zones/Naming conventions.
 
 ### Section 5 — Companion plugins
 - Is `cortex` installed? (Y/N — drives whether memory node init runs in Output 4)
@@ -172,6 +229,19 @@ _Last updated: [date]_
 - **Naming convention:** ...
 - **Standard subfolder structure:** ...
 
+## Access zones
+- **finance:** [drive/ID, path pattern, expected access, or "not used"]
+- **pipeline:** [drive/ID, path pattern, expected access, or "not used"]
+- **project:** [drive/ID, path pattern, expected access, or "not used"]
+
+## Naming conventions
+- **Client folder name:** ...
+- **Engagement folder pattern:** ...
+- **Executed-contract file pattern:** ...
+- **Superseded-draft pattern:** ...
+- **Scope Brief file name:** ...
+- **Date format:** ...
+
 ## Offerings
 [For each offering — pulled from interview, also reflected in templates/project-plans.md and templates/drive-structure.md]
 - **[Offering Full Name]** ([short name]) — [duration]
@@ -183,6 +253,10 @@ _Last updated: [date]_
 - **Cadence:** ...
 - **Response time:** ...
 - **Communication tools:** ...
+
+## Notification recipients
+- **Finance list:** ...
+- **Delivery-team list:** ...
 
 ## Companion plugins
 - **cortex:** ...

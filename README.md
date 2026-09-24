@@ -9,11 +9,16 @@ ops's `/review-deliverable`.
 
 ## What it does
 
-- **`/project-setup`** — a new client signs, you run this. Interviews you about
-  the engagement and generates: Drive folder structure, a Claude Project system
-  prompt, a phased project plan with an immediate next step, and (if
-  `cortex` is installed) a memory node so every future session has
-  context from day one.
+- **`/project-setup`** — a contract comes back signed, you run this. Starts from
+  the executed contract (verifies it's actually signed, not a draft), extracts
+  terms, and asks only about what the contract doesn't answer. Then executes one
+  confirmed plan: it creates and files the Drive folder structure itself,
+  writes the phased project plan and immediate next step into the cortex client
+  node — the public, portable project record, not a Claude Project — initializes a
+  memory node (if `cortex` is installed), and hands off to companion plugins and
+  connected apps. Respects **access zones** throughout — financial data never
+  lands in the contractor-visible project folder. No executed contract yet →
+  **prep mode**: builds the full plan, writes nothing. Supports `--dry-run`.
 - **`/client-status`** — drafts a weekly client-facing status update from
   recent activity.
 - **`/review-deliverable`** — a structured QA pass on a client deliverable
@@ -49,7 +54,13 @@ Run `/setup-projects`. Captures:
 
 - **Identity** — you, your company, what you do
 - **Offerings** — your service offerings, with names, durations, and which template applies to each
-- **Drive layout** — where Active Clients lives, naming conventions, folder structure preferences
+- **Drive layout** — where Active Clients lives, folder structure preferences
+- **Access zones** (required) — which Drive locations are `finance` (restricted),
+  `pipeline` (restricted), and `project` (open/contractor-visible); financial data
+  can never be written into `project`
+- **Naming conventions** (required) — client folder name, engagement folder
+  pattern, executed-contract and superseded-draft file patterns, Scope Brief file
+  name, date format — can be inferred from your existing Drive and confirmed
 - **Memory** — whether cortex is installed (drives whether memory init runs)
 - **Communication defaults** — your default cadence for client comms
 - **Sample SOW** — a .docx (preferred), Drive link, or PDF of an SOW you've
@@ -71,8 +82,7 @@ was captured) `<config-root>/plugins/clients.sow-template.md`.
 
 The plugin ships with **starter templates** in `references/templates/`:
 
-- `drive-structure.md` — folder layouts per offering
-- `claude-project-prompt.md` — the system-prompt template
+- `drive-structure.md` — the evergreen client/engagement folder layout
 - `project-plans.md` — phased delivery plans per offering
 - `status-template.md` — weekly status update structure
 
@@ -115,8 +125,7 @@ references/
   sow-format-default.md                 Generic SOW styling, used only absent a sample
   sow-content-schema.md                 Deterministic JSON input contract for the builder
   templates/
-    drive-structure.md       Folder layouts (committed; user-editable)
-    claude-project-prompt.md System prompt template
+    drive-structure.md       Evergreen client/engagement folder layout (committed; user-editable)
     project-plans.md         Phased plans per offering
     status-template.md       Weekly status update structure
 ```

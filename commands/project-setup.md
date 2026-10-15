@@ -223,6 +223,13 @@ Skip any that aren't installed; report the skip in Step 7.
   requires invoices itemized by phase. Phase *names* are project-safe and may be
   passed freely; rates and caps stay in finance config, passed only to `admin`'s
   own finance-scoped storage, never echoed back into a project-zone artifact.
+  If `admin` has a billing register configured (`admin.user-context.md`'s
+  `## Billing register`), also run `admin`'s
+  `references/setup-notice-generation.md` Steps 1–3 (draft register records,
+  confirm with the user, write to the register backend) — this is what gets the
+  new customer/project into the register the accountant packet later reads from.
+  Steps 4–5 of that procedure (setup sheet + accountant email) run as part of the
+  finance-alert step below, not here.
 - **`clients` `/client-status`** — register the client and cadence. If the SOW
   requires spend/forecast reporting against a cap, include that in the
   client-facing budget line per `commands/client-status.md`'s storage rule.
@@ -268,13 +275,21 @@ Each optional; skip and report if its connector isn't available.
   check applies here too.
 - **Email — kickoff:** draft the kickoff email to the primary contact, built from
   the SOW's client-inputs section. **Draft only — never send.**
-- **Email — finance alert:** draft an email to the recipients configured in
-  user-context's `## Notification recipients` (finance list) announcing the new
-  client or new engagement, with the contract's finance-only terms (billing model,
-  rate, cap, invoicing cadence/itemization, payment terms) and the executed
-  contract attached or linked from its finance-zone location. This is the request
-  for finance to set the client/engagement up in accounting — the plugin never
-  touches accounting software directly. **Draft only — never send.**
+- **Email — finance alert:** if `admin` has a billing register configured, run
+  `admin`'s `references/setup-notice-generation.md` Steps 4–5 against the records
+  confirmed in 6.4 — this produces the setup sheet (customer, project, terms,
+  contract value, billing schedule, full line-item catalog, cost assignments,
+  start date, first expected invoice) and drafts the accountant-handoff email to
+  the recipients configured in `admin.user-context.md`'s
+  `## Billing packet / accountant handoff`, using that plugin's own recipient
+  list rather than Client Success's `## Notification recipients`. If `admin`
+  isn't installed or has no register configured, fall back to the plain finance
+  alert: an email to the recipients configured in `## Notification recipients`
+  (finance list) with the contract's finance-only terms (billing model, rate,
+  cap, invoicing cadence/itemization, payment terms) and the executed contract
+  attached or linked from its finance-zone location. Either way, this is the
+  request for finance/the accountant to set the engagement up in accounting — the
+  plugin never touches accounting software directly. **Draft only — never send.**
 - **Email — delivery-team alert:** draft an email to the recipients configured in
   `## Notification recipients` (delivery-team list) announcing the new engagement,
   with the project-safe scope summary (offering, phases, deliverables, timeline,

@@ -4,6 +4,12 @@ All notable changes to delivery are documented here.
 
 Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match `plugin.json`.
 
+## [0.8.1] — Billing-register handoff at project setup (2026-10-15)
+
+### Changed
+- `/project-setup` Step 6.4 now also runs `admin`'s `references/setup-notice-generation.md` Steps 1–3 (draft/confirm/write billing-register records: Customer, Project, Line Items, Cost Assignments) when `admin` is installed with a billing register configured — skipped and reported if either condition isn't met.
+- `/project-setup` Step 6.5's finance-alert draft now generates the full accountant setup sheet (`setup-notice-generation.md` Steps 4–5) and sends it to `admin.user-context.md`'s configured accountant recipients when a billing register is in use, instead of the plain finance-terms email to Client Success's own notification list. Falls back to the prior plain finance alert when `admin`/the register isn't configured — no behavior change for users who don't use it. Still draft-only, never auto-sent.
+
 ## [0.8.0] — Executed-contract intake, access zones, real setup actions (2026-09-24)
 
 ### Breaking

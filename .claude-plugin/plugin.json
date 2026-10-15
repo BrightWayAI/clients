@@ -1,6 +1,6 @@
 {
   "name": "clients",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "Client Success. Client engagement lifecycle: start, status, QA, SOW generation. /project-setup starts from the executed contract and initializes a new engagement end-to-end (Drive structure, phased plan and next step in the cortex client node, companion-plugin/connector handoffs) behind one confirmed plan, respecting access-zone boundaries. /client-status drafts weekly client-facing status updates. /review-deliverable runs a structured brand/quality QA pass before you ship. /sow turns a proposal into a finished Statement of Work in a house format derived from your own sample — no format hardcoded in the plugin. Renamed from project-setup, 2026-09-15 — absorbs client-status and ops's review-deliverable.",
   "author": {
     "name": "BrightWay AI"

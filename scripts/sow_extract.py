@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # /// script
 # requires-python = ">=3.10"
-# dependencies = ["python-docx>=1.1,<2"]
+# dependencies = ["python-docx==1.1.2"]
 # ///
 """Derive a format spec, section skeleton, and section text from a sample SOW."""
 

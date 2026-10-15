@@ -133,7 +133,7 @@ references/
 ## Testing the SOW runtime
 
 ```bash
-uv run --with python-docx python -m unittest discover -s tests -v
+uv run --with python-docx==1.1.2 python -m unittest discover -s tests -v
 ```
 
 For release QA, also build a DOCX, render every page through the host's

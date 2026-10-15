@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # /// script
 # requires-python = ">=3.10"
-# dependencies = ["python-docx>=1.1,<2"]
+# dependencies = ["python-docx==1.1.2"]
 # ///
 """Render a Statement of Work DOCX from a derived format spec.
 

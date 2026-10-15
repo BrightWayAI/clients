@@ -4,6 +4,11 @@ All notable changes to delivery are documented here.
 
 Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match `plugin.json`.
 
+## [0.8.2] — Plugin-directory pre-submission fix (2026-10-15)
+
+### Fixed
+- The SOW scripts (`scripts/sow_build.py`, `scripts/sow_extract.py`) and `scripts/requirements-sow.txt` declared `python-docx>=1.1,<2` — an unpinned range. The Claude plugin directory's pre-submission checklist requires every package a `uv run` launcher resolves to be pinned to an exact version. Pinned to `python-docx==1.1.2` in all three places, plus the `uv run --with python-docx ...` test command in `README.md`.
+
 ## [0.8.1] — Billing-register handoff at project setup (2026-10-15)
 
 ### Changed

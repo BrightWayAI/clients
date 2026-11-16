@@ -4,6 +4,12 @@ All notable changes to delivery are documented here.
 
 Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match `plugin.json`.
 
+## [0.9.1] — Plain plugin names (2026-11-16)
+
+### Changed
+- Plugins are named for the work they cover: Ops, Clients, Comms, Growth, Briefing, Alignment (were Chief of Staff, Client Success, Comms Desk, Growth Engine, Today's Brief, Team Alignment). In ChatGPT the mention changes to match, for example `@Ops`. Plugin IDs, commands, and behavior are unchanged.
+- Description rewritten to say what the plugin covers. Commands and templates refer to "the clients plugin"; the status user-context template's section heading is now `## Client engagements`.
+
 ## [0.9.0] — Independent check for SOWs and status updates (2026-11-16)
 
 ### Added

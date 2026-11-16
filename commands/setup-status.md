@@ -1,10 +1,10 @@
 ---
-description: Configure Client Success status drafting for cadence, voice match, user-owned template overrides, per-client rules, and delivery channel. Writes `<config-root>/plugins/clients-status.user-context.md`. Re-run anytime to update.
+description: Configure status drafting for cadence, voice match, user-owned template overrides, per-client rules, and delivery channel. Writes `<config-root>/plugins/clients-status.user-context.md`. Re-run anytime to update.
 ---
 
 # /setup-status
 
-Short interview that captures what Client Success needs to draft useful client updates.
+Short interview that captures what the clients plugin needs to draft useful client updates.
 
 ---
 
@@ -54,7 +54,7 @@ Some clients prefer different formats. Ask:
 - Any clients that want a longer / shorter / different format? (capture per-client overrides)
 - Any clients that should be EXCLUDED from automatic drafting? (e.g., a client who prefers no weekly updates)
 
-If Client Success has configured engagements, walk through each active engagement to capture overrides.
+If the clients plugin has configured engagements, walk through each active engagement to capture overrides.
 
 ---
 

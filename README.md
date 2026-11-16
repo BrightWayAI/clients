@@ -94,7 +94,7 @@ Copy any template you want to customize into
 ## Companion plugins
 
 - **cortex** — for memory node initialization. If not installed, `/project-setup` skips that output.
-- **growth** — provides `pipeline-analyst` for reviewing recently-signed deals; if growth isn't installed, note "Growth Engine not installed; pipeline analysis skipped."
+- **growth** — provides `pipeline-analyst` for reviewing recently-signed deals; if growth isn't installed, note "Growth not installed; pipeline analysis skipped."
 - **ops** — brand/CRM config that `/review-deliverable` reads.
 
 Works without them.
@@ -145,9 +145,9 @@ footer/page-number field.
 <!-- OPENAI-SUPPORT:START -->
 ## ChatGPT and Codex
 
-Client Success ships as a native OpenAI plugin as well as a Claude plugin. In
-ChatGPT desktop Local Work, enable **Client Success** and ask naturally or mention
-`@Client Success`. In Codex, use natural language or the namespaced skills exposed
+Clients ships as a native OpenAI plugin as well as a Claude plugin. In
+ChatGPT desktop Local Work, enable **Clients** and ask naturally or mention
+`@Clients`. In Codex, use natural language or the namespaced skills exposed
 by the plugin. Claude slash-command names in this README remain workflow aliases.
 
 All hosts resolve the same `<config-root>` used by Cortex, so Claude, ChatGPT desktop,

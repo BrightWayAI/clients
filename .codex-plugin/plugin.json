@@ -1,6 +1,6 @@
 {
   "name": "clients",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Set up engagements from executed contracts with separate finance and project access zones, maintain the Cortex project record, draft client-status updates, review deliverables, and generate Statements of Work.",
   "author": {
     "name": "BrightWay AI",
@@ -16,7 +16,7 @@
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "Client Success",
+    "displayName": "Clients",
     "shortDescription": "Start, support, document, and QA client engagements",
     "longDescription": "Set up engagements from executed contracts with separate finance and project access zones, maintain the Cortex project record, draft client-status updates, review deliverables, and generate Statements of Work.",
     "developerName": "BrightWay AI",

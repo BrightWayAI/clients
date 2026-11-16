@@ -1,5 +1,5 @@
 ---
-description: Configure Client Success for offerings, drive layout, companion-plugin integrations, and a derived SOW format template. Writes to `<config-root>/plugins/clients.user-context.md` and `<config-root>/plugins/clients.sow-template.md` using the shared vendor-neutral config-root resolver. Re-run anytime to add or update offerings; `--add-sample` merges a second SOW sample.
+description: Configure the clients plugin for offerings, drive layout, companion-plugin integrations, and a derived SOW format template. Writes to `<config-root>/plugins/clients.user-context.md` and `<config-root>/plugins/clients.sow-template.md` using the shared vendor-neutral config-root resolver. Re-run anytime to add or update offerings; `--add-sample` merges a second SOW sample.
 ---
 
 # /setup-projects
@@ -36,7 +36,7 @@ that these two sections are new and required, then run Sections 2b and 2c before
 anything else, leaving the rest of the config untouched. Populated and current →
 ask whether to update. If missing, check the former
 `<config-root>/plugins/project-setup.user-context.md` path once and offer to import
-it into the canonical Client Success file without deleting the old file. <!-- LEGACY_COMPAT -->
+it into the canonical the clients plugin file without deleting the old file. <!-- LEGACY_COMPAT -->
 
 ---
 
@@ -130,7 +130,7 @@ Access zones/Naming conventions.
 
 ### Section 5 — Companion plugins
 - Is `cortex` installed? (Y/N — drives whether memory node init runs in Output 4)
-- Is `growth` installed? (Y/N — provides pipeline-analyst for periodic engagement reviews, and useful context when engagements originate in its signal pipeline; if not installed, note "Growth Engine not installed; pipeline analysis skipped")
+- Is `growth` installed? (Y/N — provides pipeline-analyst for periodic engagement reviews, and useful context when engagements originate in its signal pipeline; if not installed, note "Growth not installed; pipeline analysis skipped")
 
 ### Section 6 — Sample Statement of Work (powers `/sow`)
 

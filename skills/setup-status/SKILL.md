@@ -1,7 +1,7 @@
 ---
 disable-model-invocation: true
 name: setup-status
-description: "Configure Client Success status drafting for cadence, voice match, user-owned template overrides, per-client rules, and delivery channel. Writes `<config-root>/plugins/clients-status.user-context.md`. Re-run anytime to update."
+description: "Configure status drafting for cadence, voice match, user-owned template overrides, per-client rules, and delivery channel. Writes `<config-root>/plugins/clients-status.user-context.md`. Re-run anytime to update."
 ---
 
 # setup-status

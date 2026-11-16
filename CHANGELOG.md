@@ -4,6 +4,16 @@ All notable changes to delivery are documented here.
 
 Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match `plugin.json`.
 
+## [0.9.0] — Independent check for SOWs and status updates (2026-11-16)
+
+### Added
+- `/sow` Step 5.5 and `/client-status` Step 3.5: the cortex `verifier` agent checks the draft against its sources before it is shown as ready. For a SOW that is every amount, cap, date, deliverable and party name against the proposal. For a status update it is every factual statement against the week's evidence, one verifier call per client with each client's material kept separate.
+- Failures are shown with the evidence and are not fixed silently; a correction is re-checked. Without cortex the draft is labeled "Not independently checked".
+- Evals `sow-independent-check` and `client-status-independent-check`.
+
+### Not changed
+- A clean check is not legal review and sends nothing. The existing review and approval steps are unchanged.
+
 ## [0.8.4] — Cloud config-root portability (2026-10-30)
 
 ### Fixed

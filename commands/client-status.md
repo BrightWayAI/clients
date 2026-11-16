@@ -110,6 +110,35 @@ draft stops the write and is reported to the user, not silently dropped.
 
 ---
 
+## Step 3.5 — Independent check (v0.9.0+)
+
+Before presenting, have the cortex `verifier` agent check each draft against the
+evidence gathered in Step 2. A status update that says something happened when it did
+not is worse than a late one.
+
+1. **List the claims.** One per factual statement: each thing done, each meeting held
+   (date and topic), each deliverable or milestone and its date, each thing waiting on
+   the client, and any budget or hours figure. Skip the greeting, the sign-off, and the
+   optional share.
+2. **Cite sources.** The client's memory node is already a file; cite it with the
+   section. Save what Step 2 pulled from calendar, CRM, and time-tracking for this
+   client to a temporary file outside `<config-root>` and cite that. Never put one
+   client's material in another client's source file.
+3. **Invoke `verifier`** once per client. For a budget line, pass the SOW terms on
+   file as reference material. Do not pass your drafting notes.
+4. **Show the result under each draft** in Step 4: the counts, then every `fail` and
+   `unverifiable` claim with the evidence. Typical failures: an internal task described
+   as client-visible work, a planned meeting described as held, a date that moved.
+5. **Do not silently fix.** Offer the correction; after the user accepts it, re-check
+   the changed claims.
+6. **If cortex is not installed or the verifier fails,** print "Not independently
+   checked: <reason>" under the draft. Never state or imply it was checked.
+
+Delete the temporary files when the step is done. The check does not send anything and
+does not replace the user's review in Step 4.
+
+---
+
 ## Step 4 — Present drafts for review
 
 Present each draft as:
@@ -118,6 +147,9 @@ Present each draft as:
 **[Client Name] — Status Update for [date]**
 
 [Full draft, ready to copy/edit]
+
+Check: [N] statements checked — [p] pass, [f] fail, [u] unverifiable   (or: Not independently checked: [reason])
+[each fail / unverifiable statement, with the evidence]
 
 ---
 ```

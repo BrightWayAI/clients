@@ -286,7 +286,7 @@ Each optional; skip and report if its connector isn't available.
   start date, first expected invoice) and drafts the accountant-handoff email to
   the recipients configured in `admin.user-context.md`'s
   `## Billing packet / accountant handoff`, using that plugin's own recipient
-  list rather than Client Success's `## Notification recipients`. If `admin`
+  list rather than the clients plugin's `## Notification recipients`. If `admin`
   isn't installed or has no register configured, fall back to the plain finance
   alert: an email to the recipients configured in `## Notification recipients`
   (finance list) with the contract's finance-only terms (billing model, rate,

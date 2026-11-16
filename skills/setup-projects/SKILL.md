@@ -1,7 +1,7 @@
 ---
 disable-model-invocation: true
 name: setup-projects
-description: "Configure Client Success for offerings, drive layout, companion-plugin integrations, and a derived SOW format template. Writes to `<config-root>/plugins/clients.user-context.md` and `<config-root>/plugins/clients.sow-template.md` using the shared vendor-neutral config-root resolver. Re-run anytime to add or update offerings; `--add-sample` merges a second SOW sample."
+description: "Configure the clients plugin for offerings, drive layout, companion-plugin integrations, and a derived SOW format template. Writes to `<config-root>/plugins/clients.user-context.md` and `<config-root>/plugins/clients.sow-template.md` using the shared vendor-neutral config-root resolver. Re-run anytime to add or update offerings; `--add-sample` merges a second SOW sample."
 ---
 
 # setup-projects

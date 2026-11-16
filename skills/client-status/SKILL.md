@@ -1,6 +1,6 @@
 ---
 name: client-status
-description: Draft weekly client status updates per active engagement. Auto-fires on "/client-status", "draft my client updates", "weekly client updates", "status update for [client]", "send client updates", "client check-ins", or any phrase about producing client-facing status drafts. Pulls from cortex memory, Client Success config, calendar, and CRM. Drafts go for your review before sending.
+description: Draft weekly client status updates per active engagement. Auto-fires on "/client-status", "draft my client updates", "weekly client updates", "status update for [client]", "send client updates", "client check-ins", or any phrase about producing client-facing status drafts. Pulls from cortex memory, the clients plugin config, calendar, and CRM. Drafts go for your review before sending.
 ---
 
 <!-- OPENAI-ADAPTER:START -->
@@ -25,7 +25,7 @@ See `commands/client-status.md` for the full workflow.
 
 Confirm `<config-root>/plugins/clients-status.user-context.md` exists. If missing, route to `/setup-status`.
 
-Best results use Cortex memory and Client Success engagement data. Without them, drafts work but are thinner.
+Best results use Cortex memory and the clients plugin's engagement data. Without them, drafts work but are thinner.
 
 ## What this skill is NOT for
 

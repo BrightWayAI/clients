@@ -2,7 +2,7 @@
 
 ## What this plugin does with your data
 
-Client Success manages new-engagement setup, client-status drafting, and deliverable QA. It writes only user-owned local configuration and confirmed Cortex memory updates.
+The clients plugin manages new-engagement setup, client-status drafting, and deliverable QA. It writes only user-owned local configuration and confirmed Cortex memory updates.
 
 **Reads:**
 - **Information from the user during the interview** (no automated reads).

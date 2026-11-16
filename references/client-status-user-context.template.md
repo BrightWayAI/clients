@@ -21,6 +21,6 @@ _Last updated: [filled by setup]_
 - **Time-tracking hours:** [Y/N]
 - **Thought-leadership shares:** [Y/N]
 
-## Client Success
+## Client engagements
 - **Default channel:** [email / Slack / portal / Drive]
 - **Per-client channel overrides:** [if any]

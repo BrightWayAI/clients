@@ -33,6 +33,8 @@ ops's `/review-deliverable`.
   `--client`, `--phase`, and `--amendment` (for addenda to an existing
   SOW/MSA).
 
+**Independent check (0.9.0+).** `/sow` and `/client-status` have the cortex `verifier` agent check the draft against its sources before you see it as ready: figures and dates against the proposal for a SOW, each statement against the week's evidence for a status update. Failures are shown with the evidence and are never fixed silently. Without cortex the draft is labeled "Not independently checked".
+
 The SOW scripts declare `python-docx` through PEP 723. Run them with `uv run`
 for an isolated dependency environment; `scripts/requirements-sow.txt` is the
 fallback for hosts without `uv`. ChatGPT and Codex use their document-artifact

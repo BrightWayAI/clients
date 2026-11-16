@@ -110,6 +110,36 @@ addendum) rather than re-asking for them.
 
 ---
 
+## Step 5.5 — Independent check (v0.9.0+)
+
+Before rendering, have the cortex `verifier` agent check the drafted content against
+the proposal. This catches a wrong figure before it is in a formatted document.
+
+1. **List the claims.** One per fact a signer would rely on: every amount, rate, cap,
+   not-to-exceed figure, payment term, date, phase name, deliverable, party name, and
+   governing-law choice in the engagement-specific sections. Skip boilerplate copied
+   verbatim from the template.
+2. **Cite sources.** Save the proposal text from Step 2 to a temporary file outside
+   `<config-root>` and cite it. If Step 3 used a prior agreement, save and cite that
+   too. A figure that came from a Step 4 answer or a template default has no document
+   source: list it as `from your answer` or `template default` instead of sending it to
+   the verifier.
+3. **Invoke `verifier`** with the claims and sources, and with the prior agreement as
+   reference material when one was used. Do not pass your drafting notes or reasoning.
+4. **Report before rendering.** Show the counts, then every `fail` and `unverifiable`
+   claim with the verifier's evidence. A derived figure (a cap taken from the top of a
+   proposal range) passes only if the source figure it derives from is correct; say
+   which rule produced it.
+5. **Do not silently fix.** Ask how to resolve each failure. After a correction,
+   re-check the changed claims. Proceed to Step 6 only when the user says to.
+6. **If cortex is not installed or the verifier fails,** say "Not independently
+   checked: <reason>" and continue to Step 6. Never state or imply the SOW was checked.
+
+Delete the temporary files when the step is done. A clean check is not legal review and
+does not change the Step 7 labeling.
+
+---
+
 ## Step 6 — Render, review, deliver
 
 1. Write the completed document content to a temporary JSON file using the
@@ -141,6 +171,8 @@ addendum) rather than re-asking for them.
 ---
 
 ## Step 7 — Close out
+
+State the Step 5.5 result first (checked with counts, or "Not independently checked"), and list any claim that is still `fail` or `unverifiable` in the delivered document.
 
 End with 2–3 sentences naming every judgment call made: rate assumptions,
 caps chosen, governing law applied, cost allocations resolved without an

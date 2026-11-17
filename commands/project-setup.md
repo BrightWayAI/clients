@@ -97,7 +97,7 @@ structure is one evergreen folder per client with dated engagement subfolders
 underneath (`[Client]/[YYYY-MM] [Engagement Name]/`), so a new engagement or phase
 is just a new sibling subfolder — never a reason to create a second client folder.
 If several client-level folders already exist for the same client in the same zone
-(e.g., "Barker and Scott" and "Barker & Scott"), list them and ask which is
+(e.g., "Hale and Finch" and "Hale & Finch"), list them and ask which is
 canonical. Once confirmed: propose renaming the canonical one to match the naming
 convention, and propose moving any content — including any existing engagement
 subfolders — from the non-canonical folder(s) into it. **Never delete** — if a move

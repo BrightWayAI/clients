@@ -45,7 +45,7 @@ if you don't separate your Drive that way (not recommended).
 _Required alongside Access zones. Applied to every folder/file `/project-setup` creates or files. `/setup-projects` can infer these from your existing Drive._
 
 - **Client folder name:** [one canonical, evergreen name per client, e.g.,
-  "Barker & Scott" — no "and" / "&" / hyphen variants. Never a per-engagement
+  "Hale & Finch" — no "and" / "&" / hyphen variants. Never a per-engagement
   folder — engagements are dated subfolders underneath.]
 - **Engagement folder pattern:** [e.g., `YYYY-MM [Engagement Name]`, where YYYY-MM
   is the engagement's effective date from the SOW]

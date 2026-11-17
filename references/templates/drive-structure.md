@@ -48,7 +48,7 @@ project-safe fields only:
 
 It explicitly **excludes**: compensation, IP terms, liability, indemnification, and
 termination-payment terms. It carries exactly one line naming where the governing
-contract is held (e.g., "Governing contract: filed in Finance — Barker & Scott —
+contract is held (e.g., "Governing contract: filed in Finance — Hale & Finch —
 2026-10 Phase 2 Build"), with no link and no amounts. Run the pricing-leak check on
 the Scope Brief before writing it — see `commands/project-setup.md` Step 6.3.
 

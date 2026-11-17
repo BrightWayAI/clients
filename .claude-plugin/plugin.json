@@ -1,6 +1,6 @@
 {
   "name": "clients",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "description": "Clients. Client engagements after the contract is signed. /project-setup starts an engagement from the executed contract (folder structure, phased plan, memory record) behind one confirmed plan, keeping finance-only terms out of shared places; /client-status drafts the weekly client-facing status update; /review-deliverable runs a brand and quality check before you ship; /sow turns a proposal into a Statement of Work in your own house format. SOW and status drafts are checked against their sources before you see them. Configure with /setup-projects and /setup-status.",
   "author": {
     "name": "BrightWay AI"

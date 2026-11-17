@@ -4,6 +4,12 @@ All notable changes to delivery are documented here.
 
 Format follows [Keep a Changelog](https://keepachangelog.com/). Versions match `plugin.json`.
 
+## [0.9.2] — Eval fixture and a quality test (2026-11-16)
+
+### Added
+- `evals/_fixtures/seed-config-root.sh` (a copy of cortex's fictional config folder) and `evals/README.md`. The three natural-language cases now run against it.
+- Output-quality eval `client-status-quality`: reports what happened, does not present owed work as delivered, asks the client for what is outstanding, and carries no price.
+
 ## [0.9.1] — Plain plugin names (2026-11-16)
 
 ### Changed

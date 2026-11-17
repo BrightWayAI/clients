@@ -7,4 +7,4 @@ append_system_prompt: |
   not stop because `root-status` cannot be run. Read what you need from that folder.
 ---
 
-Barker & Scott just signed the Phase 2 contract — it came back fully executed this morning.
+Hale & Finch just signed the Phase 2 contract — it came back fully executed this morning.
